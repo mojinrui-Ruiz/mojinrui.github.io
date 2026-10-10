@@ -1,0 +1,953 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta property="og:title" content="莫晋睿 · 个人主页">
+<meta property="og:description" content="产品经理 / 用户研究 / AI 产品：项目、实习经历和可以提问的 AI 分身">
+<meta property="og:image" content="/media/memory-tree.jpg">
+<title>莫晋睿 · 个人主页</title>
+<meta name="description" content="莫晋睿的个人主页：产品方法、项目、实习经历和 AI 分身">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Caveat:wght@500;700&display=swap">
+<style>
+/* 个人主页：白板 / 亲和图的视觉语言。马克笔蓝写字，荧光笔只划真实数字 */
+:root {
+  --board: #eef1f4;
+  --paper: #ffffff;
+  --ink: #15213b;
+  --graphite: #5a6577;
+  --rule: #ccd3dc;
+  --marker: #2448c9;
+  --marker-soft: #dfe6fb;
+  --hl: #ffe45c;
+  --note: #fff7c2;
+  --note-ink: #4a3d00;
+  --latin: 'Archivo', -apple-system, BlinkMacSystemFont, sans-serif;
+  --cn: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+  --font: var(--latin), var(--cn);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --board: #0f1520; --paper: #172030; --ink: #e7ebf2; --graphite: #9aa5b6; --rule: #2b3648;
+    --marker: #8aa6ff; --marker-soft: #1f2c4d; --hl: #8a7300; --note: #3a3418; --note-ink: #f3e7a6;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --board: #0f1520; --paper: #172030; --ink: #e7ebf2; --graphite: #9aa5b6; --rule: #2b3648;
+  --marker: #8aa6ff; --marker-soft: #1f2c4d; --hl: #8a7300; --note: #3a3418; --note-ink: #f3e7a6;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0; background: var(--board); color: var(--ink);
+  font: 16px/1.7 var(--font); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  /* 白板上淡淡的点阵 */
+  background-image: radial-gradient(color-mix(in srgb, var(--rule) 70%, transparent) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+a { color: var(--marker); text-underline-offset: 3px; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--marker); outline-offset: 3px; border-radius: 4px; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+@media (max-width: 640px) { .wrap { padding: 0 16px; } }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* 荧光笔：只用在数字上 */
+mark.hl {
+  color: inherit; padding: 0 .12em; border-radius: 2px;
+  background: linear-gradient(transparent 52%, var(--hl) 52%, var(--hl) 92%, transparent 92%) no-repeat 0 0 / 100% 100%;
+  transition: background-size .5s ease;
+}
+.ink-in mark.hl { background-size: 0% 100%; }
+.ink-in.inked mark.hl { background-size: 100% 100%; }
+
+/* ---------- 顶栏 ---------- */
+.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30;
+  background: color-mix(in srgb, var(--board) 88%, transparent); backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--rule);
+}
+.top .wrap { display: flex; align-items: center; gap: 20px; height: 60px; }
+.top .me { font-weight: 700; color: var(--ink); text-decoration: none; font-size: 17px; letter-spacing: .02em; margin-right: auto; white-space: nowrap; }
+.top nav { display: flex; gap: 4px; }
+.top nav a { color: var(--graphite); text-decoration: none; font-size: 15px; padding: 6px 10px; border-radius: 6px; }
+.top nav a:hover { color: var(--ink); }
+.top nav a.on { color: var(--ink); box-shadow: inset 0 -2px 0 var(--marker); border-radius: 0; }
+.ask-btn {
+  display: inline-flex; align-items: center; gap: 8px; border: 0; cursor: pointer;
+  background: var(--ink); color: var(--board); padding: 8px 14px 8px 12px; border-radius: 999px; font-size: 14px; font-weight: 600; white-space: nowrap;
+}
+.ask-btn .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--hl); box-shadow: 0 0 0 3px color-mix(in srgb, var(--hl) 35%, transparent); }
+@media (max-width: 760px) { .top nav { display: none; } }
+
+/* ---------- 首屏 ---------- */
+.hero { padding: 64px 0 40px; }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 48px; align-items: start; }
+.hero .role { color: var(--graphite); margin: 0 0 18px; font-size: 15px; }
+.hero h1 {
+  font-size: clamp(56px, 9vw, 104px); line-height: .95; margin: 0 0 22px; letter-spacing: .02em; font-weight: 800;
+}
+.hero h1 .en { display: block; font-family: var(--latin); font-stretch: 125%; font-weight: 300; font-size: .26em; letter-spacing: .04em; color: var(--graphite); margin-top: 14px; }
+.hero .headline span { display: inline-block; }
+.hero .headline { font-size: clamp(21px, 2.4vw, 26px); line-height: 1.45; font-weight: 600; margin: 0 0 14px; max-width: 18em; text-wrap: balance; }
+.hero .bio { color: var(--graphite); margin: 0 0 26px; max-width: 32em; }
+.cta { display: flex; flex-wrap: wrap; gap: 10px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px; border-radius: 10px; cursor: pointer;
+  border: 1.5px solid var(--ink); background: transparent; color: var(--ink); text-decoration: none; font-weight: 600; font-size: 15px;
+}
+.btn.solid { background: var(--marker); border-color: var(--marker); color: #fff; }
+:root[data-theme="dark"] .btn.solid { color: #0f1520; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn.solid { color: #0f1520; } }
+.btn:hover { background: var(--marker-soft); }
+.btn.solid:hover { background: var(--marker); filter: brightness(1.08); }
+.hero .wrap.solo { grid-template-columns: minmax(0, 1fr); }
+@media (max-width: 900px) { .hero .wrap { grid-template-columns: 1fr; gap: 32px; } .hero { padding-top: 36px; } }
+
+/* 白板：可拖动的便利贴，点「整理」按方法归类 */
+.board {
+  position: relative; background: var(--paper); border: 1px solid var(--rule); border-radius: 14px;
+  height: 460px; overflow: hidden; touch-action: pan-y;
+}
+.board-bar { position: absolute; left: 0; right: 0; bottom: 0; z-index: 5; display: flex; align-items: center; gap: 8px; padding: 10px 12px;
+  border-top: 1px solid var(--rule); background: color-mix(in srgb, var(--paper) 92%, transparent); }
+.board-bar .hint { font-size: 13px; color: var(--graphite); margin-right: auto; line-height: 1.4; }
+.chipbtn { border: 1px solid var(--rule); background: var(--paper); padding: 5px 12px; border-radius: 999px; cursor: pointer; font-size: 13px; white-space: nowrap; }
+.chipbtn:hover { border-color: var(--ink); }
+.chipbtn.primary { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.cols { position: absolute; inset: 0 0 52px; display: grid; grid-template-columns: repeat(4, 1fr); pointer-events: none; opacity: 0; transition: opacity .4s; }
+.sorted .cols { opacity: 1; }
+.cols div { position: relative; border-right: 1px dashed var(--rule); padding: 12px 10px 0; font-size: 14px; }
+.cols b { display: block; }
+.cols div:last-child { border-right: 0; }
+.cols small { display: block; font-weight: 400; color: var(--graphite); font-size: 12px; }
+.note {
+  position: absolute; left: 0; top: 0; z-index: 2; cursor: grab; user-select: none; -webkit-user-select: none;
+  background: var(--note); color: var(--note-ink); border: 0; padding: 6px 10px; font-size: 14px; line-height: 1.3; border-radius: 3px;
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--note-ink) 18%, transparent), 0 6px 14px -8px color-mix(in srgb, var(--ink) 40%, transparent);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px;
+  transition: transform .75s cubic-bezier(.2, .8, .2, 1), width .5s, background .2s;
+}
+.note.s1 { background: #d9f0ff; color: #0c3a5c; }
+.note.s2 { background: #ffe0d6; color: #5c1d0c; }
+.note.s3 { background: #e3f6d8; color: #23440f; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .note.s1 { background: #173550; color: #cfe8ff; } :root:not([data-theme="light"]) .note.s2 { background: #4a2418; color: #ffd9cc; } :root:not([data-theme="light"]) .note.s3 { background: #1f3a17; color: #d8f2c8; } }
+:root[data-theme="dark"] .note.s1 { background: #173550; color: #cfe8ff; } :root[data-theme="dark"] .note.s2 { background: #4a2418; color: #ffd9cc; } :root[data-theme="dark"] .note.s3 { background: #1f3a17; color: #d8f2c8; }
+.board.sorted .note { white-space: normal; text-align: left; }
+.note.dragging { transition: none; cursor: grabbing; z-index: 4; }
+.note.lit { outline: 2px solid var(--marker); }
+.board.drift .note:not(.dragging) { animation: bob 6s ease-in-out infinite; animation-delay: var(--d, 0s); }
+.board.sorted .note, .board.sorted.drift .note:not(.dragging) { animation: none; }
+@keyframes bob { 50% { translate: 0 -5px; } }
+@media (prefers-reduced-motion: reduce) { .note { transition: none; } .board.drift .note { animation: none; } mark.hl { transition: none; } }
+.pop {
+  position: absolute; z-index: 6; width: min(320px, calc(100% - 24px)); background: var(--paper); color: var(--ink);
+  border: 1px solid var(--ink); border-radius: 10px; padding: 12px 14px; font-size: 14px; line-height: 1.6;
+  box-shadow: 0 12px 30px -12px color-mix(in srgb, var(--ink) 50%, transparent);
+}
+.pop b { display: block; margin-bottom: 4px; }
+.pop p { margin: 0 0 8px; }
+.pop .src { color: var(--graphite); font-size: 12px; }
+.pop .row { display: flex; gap: 8px; justify-content: space-between; align-items: center; margin-top: 4px; }
+@media (max-width: 640px) { .board { height: 420px; } .note { font-size: 13px; padding: 5px 8px; } .cols div { font-size: 13px; padding: 8px 6px 0; } .cols small { display: none; } }
+
+/* 关键数字 */
+.stats { padding: 8px 0 24px; }
+.stats ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0; border-top: 1.5px solid var(--ink); }
+.stats li { padding: 18px 20px 6px 0; }
+.stats .n { font-family: var(--latin), var(--cn); font-stretch: 125%; font-weight: 800; font-size: clamp(34px, 4vw, 46px); line-height: 1.1; display: inline-block; }
+.stats .l { display: block; color: var(--graphite); font-size: 14px; margin-top: 6px; max-width: 18em; }
+
+/* ---------- 分区通用 ---------- */
+.sec { padding: 72px 0 24px; }
+.sec-h { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 32px; align-items: end; margin-bottom: 32px; }
+.sec-h h2 { font-size: clamp(30px, 4vw, 42px); line-height: 1.15; margin: 0; letter-spacing: .01em; }
+.sec-h p { margin: 0; color: var(--graphite); max-width: 36em; }
+@media (max-width: 800px) { .sec-h { grid-template-columns: 1fr; gap: 10px; } .sec { padding-top: 56px; } }
+
+/* 方法：真实的先后顺序，所以编号 */
+.method { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1.5px solid var(--ink); }
+.step { padding: 20px 18px 22px 0; border-right: 1px solid var(--rule); }
+.step + .step { padding-left: 18px; }
+.step:last-child { border-right: 0; }
+.step .no { font-family: var(--latin); font-stretch: 125%; font-weight: 300; font-size: 40px; line-height: 1; color: var(--marker); }
+.step h3 { font-size: 20px; margin: 10px 0 4px; }
+.step .def { color: var(--graphite); font-size: 14px; margin: 0 0 14px; }
+.step ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.step li { font-size: 14px; line-height: 1.65; }
+.step li .src { display: block; color: var(--graphite); font-size: 12px; margin-top: 2px; }
+.step li.lit { background: var(--marker-soft); margin: -6px -8px; padding: 6px 8px; border-radius: 6px; }
+.kws { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.kw { border: 1px solid var(--rule); background: var(--paper); border-radius: 999px; padding: 2px 10px; font-size: 12px; cursor: pointer; }
+.kw[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+@media (max-width: 900px) { .method { grid-template-columns: 1fr 1fr; } .step:nth-child(2) { border-right: 0; } .step:nth-child(3) { padding-left: 0; } .step:nth-child(n+3) { border-top: 1px solid var(--rule); } }
+@media (max-width: 560px) { .method { grid-template-columns: 1fr; } .step, .step + .step { padding-left: 0; border-right: 0; } .step + .step { border-top: 1px solid var(--rule); } }
+
+/* 项目：一个项目一整行，媒体与文字左右交替 */
+.case { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 40px; padding: 36px 0; border-top: 1.5px solid var(--ink); align-items: start; }
+.case:nth-child(even) .media { order: 2; }
+.media { position: relative; border-radius: 12px; overflow: hidden; background: var(--ink); aspect-ratio: 640 / 432; }
+.media video, .media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.media .play {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 10px; border: 0; cursor: pointer;
+  background: linear-gradient(transparent 55%, rgba(10, 16, 30, .65)); color: #fff; font-size: 15px; font-weight: 600;
+}
+.media .play span { display: inline-flex; align-items: center; gap: 10px; background: rgba(255, 255, 255, .94); color: #15213b; padding: 10px 18px; border-radius: 999px; }
+.media .play svg { width: 14px; height: 14px; }
+/* 没有图片 / 视频的项目：用项目自己的关键词拼一块白板 */
+.typo { background: var(--paper); border: 1px solid var(--rule); color: var(--ink); display: flex; flex-direction: column; justify-content: space-between; padding: 22px; }
+.typo .res { margin-top: 28px; }
+.typo .big { display: block; font-family: var(--latin), var(--cn); font-stretch: 125%; font-weight: 800; font-size: clamp(56px, 7vw, 92px); line-height: 1; }
+.typo .ctx { display: block; margin-top: 14px; color: var(--graphite); font-size: 15px; max-width: 22em; }
+.typo .t { font-size: clamp(26px, 3.2vw, 38px); font-weight: 800; line-height: 1.15; max-width: 10em; }
+.typo .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.typo .tags span { background: var(--note); color: var(--note-ink); padding: 5px 10px; font-size: 13px; border-radius: 3px; rotate: var(--r, 0deg); }
+.typo .open { position: absolute; right: 16px; top: 16px; font-size: 13px; }
+.case .when { color: var(--graphite); font-size: 14px; margin: 0 0 6px; font-variant-numeric: tabular-nums; }
+.case h3 { font-size: clamp(24px, 2.6vw, 30px); line-height: 1.25; margin: 0 0 12px; }
+.case .lede { margin: 0 0 14px; }
+.case .more { margin: 0 0 14px; padding: 0; list-style: none; display: grid; gap: 10px; }
+.case .more li { font-size: 15px; color: var(--ink); }
+.case .more li b { display: block; font-size: 13px; color: var(--graphite); font-weight: 600; }
+.tagline { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 0 0 18px; padding: 0; list-style: none; color: var(--graphite); font-size: 13px; }
+.tagline li::before { content: '#'; color: var(--marker); margin-right: 2px; }
+.acts { display: flex; flex-wrap: wrap; gap: 8px; }
+.acts .btn { padding: 8px 14px; font-size: 14px; }
+@media (max-width: 860px) { .case { grid-template-columns: 1fr; gap: 20px; } .case:nth-child(even) .media { order: 0; } }
+
+/* 经历：时间线 */
+.tl { list-style: none; margin: 0; padding: 0; border-top: 1.5px solid var(--ink); }
+.tl > li { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 28px; padding: 26px 0; border-bottom: 1px solid var(--rule); }
+.tl .when { color: var(--graphite); font-size: 14px; font-variant-numeric: tabular-nums; padding-top: 4px; }
+.tl h3 { font-size: 22px; margin: 0; }
+.tl .title { color: var(--graphite); margin: 2px 0 10px; }
+.tl .lede { margin: 0 0 10px; max-width: 46em; }
+.tl .more { list-style: none; margin: 0 0 10px; padding: 0; display: grid; gap: 12px; max-width: 46em; }
+.tl .more b { display: block; font-size: 13px; color: var(--graphite); }
+.linkish { border: 0; background: none; color: var(--marker); cursor: pointer; padding: 0; font-weight: 600; font-size: 14px; }
+@media (max-width: 640px) { .tl > li { grid-template-columns: 1fr; gap: 4px; } }
+
+/* 教育背景：两所学校并排 */
+.edu { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1.5px solid var(--ink); }
+.edu .it { padding: 22px 28px 8px 0; display: flex; flex-direction: column; gap: 4px; }
+.edu .it + .it { padding-left: 28px; border-left: 1px solid var(--rule); }
+.edu .when { color: var(--graphite); font-size: 14px; font-variant-numeric: tabular-nums; }
+.edu b { font-size: clamp(20px, 2.2vw, 24px); line-height: 1.35; }
+.edu .deg { font-weight: 600; }
+.edu p { margin: 6px 0 0; color: var(--graphite); font-size: 14px; max-width: 34em; }
+@media (max-width: 760px) { .edu { grid-template-columns: 1fr; } .edu .it + .it { padding-left: 0; border-left: 0; border-top: 1px solid var(--rule); } }
+
+/* 校园与技能 */
+.bg { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; border-top: 1.5px solid var(--ink); padding-top: 24px; }
+.bg h3 { font-size: 15px; color: var(--graphite); margin: 0 0 12px; font-weight: 600; }
+.bg .it { margin-bottom: 18px; }
+.bg .it b { display: block; font-size: 17px; line-height: 1.4; }
+.bg .it span { display: block; color: var(--graphite); font-size: 14px; }
+.bg .it p { margin: 4px 0 0; font-size: 14px; }
+.skills { display: flex; flex-wrap: wrap; gap: 6px; }
+.skills span { border: 1px solid var(--rule); background: var(--paper); border-radius: 6px; padding: 3px 10px; font-size: 14px; }
+@media (max-width: 860px) { .bg { grid-template-columns: 1fr; gap: 8px; } }
+.about { margin-top: 40px; font-size: clamp(18px, 2vw, 21px); line-height: 1.75; max-width: 38em; }
+
+/* 联系 */
+.contact { padding: 88px 0 120px; }
+.contact h2 { font-size: clamp(32px, 5vw, 56px); line-height: 1.15; margin: 0 0 18px; max-width: 14em; }
+.contact .mail { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-family: var(--latin), var(--cn); font-size: clamp(20px, 2.6vw, 28px); font-weight: 600; margin-bottom: 22px; word-break: break-all; }
+.contact .mail a { color: var(--ink); text-decoration-thickness: 2px; text-decoration-color: var(--hl); }
+footer { border-top: 1px solid var(--rule); padding: 20px 0 40px; color: var(--graphite); font-size: 13px; }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: space-between; }
+
+/* ---------- AI 分身面板 ---------- */
+.agent {
+  position: fixed; z-index: 50; top: 0; right: 0; bottom: 0; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); width: min(420px, 100vw);
+  background: var(--paper); border-left: 1px solid var(--rule); display: flex; flex-direction: column;
+  box-shadow: -20px 0 50px -30px color-mix(in srgb, var(--ink) 60%, transparent);
+  transform: translateX(100%); visibility: hidden; transition: transform .35s cubic-bezier(.2, .8, .2, 1), visibility 0s .35s;
+}
+.agent.open { transform: none; visibility: visible; transition: transform .35s cubic-bezier(.2, .8, .2, 1); }
+@media (prefers-reduced-motion: reduce) { .agent, .agent.open { transition: none; } }
+.agent header { display: flex; align-items: flex-start; gap: 12px; padding: 18px 18px 14px; border-bottom: 1px solid var(--rule); }
+.agent header div { margin-right: auto; }
+.agent header b { display: block; font-size: 17px; }
+.agent header small { color: var(--graphite); font-size: 13px; }
+.x { border: 1px solid var(--rule); background: none; border-radius: 8px; width: 34px; height: 34px; cursor: pointer; font-size: 18px; line-height: 1; flex: none; }
+.msgs { flex: 1; overflow-y: auto; padding: 18px; display: flex; flex-direction: column; gap: 12px; overscroll-behavior: contain; }
+.msg { max-width: 88%; padding: 10px 14px; border-radius: 14px; font-size: 15px; line-height: 1.65; white-space: pre-wrap; word-break: break-word; }
+.msg.bot { background: var(--board); align-self: flex-start; border-bottom-left-radius: 4px; }
+.msg.me { background: var(--ink); color: var(--paper); align-self: flex-end; border-bottom-right-radius: 4px; }
+.msg.typing { color: var(--graphite); }
+.msg.typing::after { content: ''; display: inline-block; width: 1.2em; text-align: left; animation: dots 1.2s steps(4) infinite; }
+@keyframes dots { 0% { content: ''; } 25% { content: '.'; } 50% { content: '..'; } 75% { content: '...'; } }
+.sugg { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 18px 12px; }
+.sugg button { border: 1px solid var(--rule); background: var(--paper); border-radius: 999px; padding: 5px 12px; font-size: 13px; cursor: pointer; text-align: left; }
+.sugg button:hover { border-color: var(--marker); color: var(--marker); }
+.agent form { display: flex; gap: 8px; padding: 12px 14px 14px; border-top: 1px solid var(--rule); }
+.agent input { flex: 1; min-width: 0; border: 1.5px solid var(--rule); border-radius: 10px; padding: 10px 12px; font: inherit; font-size: 15px; background: var(--board); color: var(--ink); }
+.agent input:focus { outline: none; border-color: var(--marker); }
+.agent form button { border: 0; background: var(--marker); color: #fff; border-radius: 10px; padding: 0 16px; font-weight: 600; cursor: pointer; }
+.agent form button:disabled { opacity: .5; cursor: default; }
+.scrim { position: fixed; inset: 0; z-index: 45; background: rgba(10, 16, 30, .35); opacity: 0; pointer-events: none; transition: opacity .3s; }
+.scrim.on { opacity: 1; pointer-events: auto; }
+@media (min-width: 1280px) { .scrim.on { opacity: 0; pointer-events: none; } }
+.fab { position: fixed; right: 20px; bottom: 20px; z-index: 40; box-shadow: 0 10px 30px -10px color-mix(in srgb, var(--ink) 70%, transparent); padding: 12px 18px 12px 14px; font-size: 15px;
+  opacity: 0; translate: 0 12px; pointer-events: none; transition: opacity .25s, translate .25s; }
+.fab.on { opacity: 1; translate: 0 0; pointer-events: auto; }
+.empty { padding: 120px 0; }
+
+/* ---------- ① 你好，我是 ---------- */
+.intro { padding: 56px 0 40px; }
+.intro .wrap { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 48px; align-items: center; }
+.intro .hi-cn { margin: 0; color: var(--graphite); font-size: 15px; display: flex; align-items: center; gap: 10px; }
+.intro .hi-cn::before { content: ''; width: 32px; height: 2px; background: var(--marker); }
+.intro .hi { font-family: 'Caveat', 'Segoe Print', 'Bradley Hand', cursive; font-weight: 700; font-size: clamp(34px, 4.6vw, 52px); color: var(--marker); margin: 6px 0 -4px; line-height: 1.1; rotate: -2deg; transform-origin: left; }
+.intro h1 { font-size: clamp(64px, 10vw, 120px); line-height: 1; margin: 0 0 18px; letter-spacing: .02em; font-weight: 800; }
+.intro h1 .en { display: block; font-family: var(--latin); font-stretch: 125%; font-weight: 300; font-size: .22em; letter-spacing: .05em; color: var(--graphite); margin-top: 14px; }
+.intro .tags { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; margin: 0 0 14px; font-size: clamp(19px, 2.2vw, 24px); font-weight: 700; }
+.intro .tags i { font-style: normal; color: var(--rule); font-weight: 300; }
+.intro .lead { color: var(--graphite); max-width: 34em; margin: 0 0 26px; }
+.btn.ghost { border-color: transparent; color: var(--marker); }
+.intro .down { display: inline-flex; align-items: center; gap: 8px; margin-top: 34px; color: var(--graphite); font-size: 14px; text-decoration: none; }
+.intro .down::before { content: '↓'; font-family: var(--latin); }
+/* 头像卡：手绘描边的纸，用胶带贴在白板上 */
+.portrait { position: relative; margin: 0; justify-self: center; width: min(360px, 100%); padding: 22px 22px 14px; background: var(--paper);
+  border: 2px solid var(--ink); border-radius: 255px 14px 225px 14px / 14px 225px 14px 255px; rotate: 2deg;
+  box-shadow: 8px 10px 0 -2px color-mix(in srgb, var(--ink) 14%, transparent); }
+.portrait .tape { position: absolute; top: -14px; left: 50%; width: 110px; height: 28px; translate: -50% 0; rotate: -3deg; background: color-mix(in srgb, var(--hl) 55%, transparent); }
+.portrait svg { display: block; width: 100%; height: auto; }
+.portrait figcaption { text-align: center; color: var(--graphite); font-size: 13px; margin-top: 4px; }
+.portrait .n2 { fill: #ffe0d6; } .portrait .t2 { fill: #5c1d0c; }
+.portrait .n3 { fill: #d9f0ff; } .portrait .t3 { fill: #0c3a5c; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .portrait .n2 { fill: #4a2418; } :root:not([data-theme="light"]) .portrait .t2 { fill: #ffd9cc; } :root:not([data-theme="light"]) .portrait .n3 { fill: #173550; } :root:not([data-theme="light"]) .portrait .t3 { fill: #cfe8ff; } }
+:root[data-theme="dark"] .portrait .n2 { fill: #4a2418; } :root[data-theme="dark"] .portrait .t2 { fill: #ffd9cc; } :root[data-theme="dark"] .portrait .n3 { fill: #173550; } :root[data-theme="dark"] .portrait .t3 { fill: #cfe8ff; }
+@media (max-width: 860px) { .intro .wrap { grid-template-columns: 1fr; gap: 36px; } .portrait { width: min(300px, 86%); } .intro { padding-top: 32px; } }
+
+/* ---------- ② 关于我 ---------- */
+.sec-h .hand { font-size: 15px; }
+.sec-h .hand::before { content: '— '; }
+.about-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 36px; align-items: start; }
+.sheet { background: var(--paper); border: 2px solid var(--ink); padding: 30px 34px; rotate: -.6deg; font-size: 16.5px; line-height: 1.95;
+  border-radius: 14px 225px 14px 255px / 255px 14px 225px 14px; box-shadow: 7px 8px 0 -2px color-mix(in srgb, var(--ink) 14%, transparent); }
+.sheet p { margin: 0 0 14px; max-width: 34em; }
+.sheet b { font-weight: 700; background: linear-gradient(transparent 62%, color-mix(in srgb, var(--hl) 60%, transparent) 62%); }
+.sheet blockquote { margin: 18px 0 0; padding: 12px 18px; border-left: 3px solid var(--marker); background: var(--marker-soft); border-radius: 0 8px 8px 0; font-weight: 600; }
+.facts { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.facts li { display: flex; align-items: center; gap: 14px; background: var(--paper); border: 1.5px solid var(--rule); padding: 14px 16px; rotate: var(--r, 0deg);
+  border-radius: 225px 12px 255px 12px / 12px 255px 12px 225px; }
+.facts .ic { flex: none; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--marker-soft); color: var(--marker); }
+.facts .ic svg { width: 20px; height: 20px; }
+.facts small { display: block; color: var(--graphite); font-size: 12px; }
+.facts b { display: block; font-size: 15px; line-height: 1.45; }
+@media (max-width: 860px) { .about-grid { grid-template-columns: 1fr; } .sheet { padding: 22px 20px; rotate: 0deg; } }
+@media (prefers-reduced-motion: reduce) { .intro .hi, .portrait, .sheet, .facts li { rotate: none; } }
+
+/* 原首屏改成白板分区：标题用 h2 */
+#board-sec { padding-top: 56px; }
+#board-sec .headline { font-size: clamp(26px, 3vw, 34px); line-height: 1.35; margin: 0 0 14px; max-width: 14em; text-wrap: balance; }
+#board-sec .headline span { display: inline-block; }
+
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="me" href="#top" id="me">个人主页</a>
+  <nav aria-label="页面导航" id="nav"></nav>
+  <button class="ask-btn" data-open-agent><span class="dot" aria-hidden="true"></span>问 AI 分身</button>
+</div></header>
+
+<main id="app"><div class="wrap empty"><p>正在加载…</p></div></main>
+
+<button class="ask-btn fab" id="fab" data-open-agent aria-label="打开 AI 分身"><span class="dot" aria-hidden="true"></span>问 AI 分身</button>
+<div class="scrim" id="scrim"></div>
+<aside class="agent" id="agent" role="dialog" aria-modal="false" aria-labelledby="agentTitle" aria-hidden="true">
+  <header>
+    <div><b id="agentTitle">AI 分身</b><small id="agentSub">只根据主页上的公开资料回答</small></div>
+    <button class="x" id="closeAgent" aria-label="关闭 AI 分身">×</button>
+  </header>
+  <div class="msgs" id="msgs" aria-live="polite"></div>
+  <div class="sugg" id="sugg"></div>
+  <form id="askForm"><label class="sr" for="q">输入问题</label><input id="q" placeholder="想问点什么？" autocomplete="off"><button>发送</button></form>
+</aside>
+<script>
+// 个人主页：渲染 /api/public/:slug，白板交互 + AI 分身
+(() => {
+  const slug = decodeURIComponent(location.pathname.split('/').filter(Boolean)[1] || '');
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const safeUrl = (u) => (/^(https?:|mailto:|media\/)/i.test(u || '') ? u : '');
+  const ym = (d) => String(d || '').replace(/^(\d{4})-(\d{2}).*/, '$1.$2');
+  const span = (a, b) => (a ? `${ym(a)} – ${b ? ym(b) : '至今'}` : ym(b));
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const store = { get(k) { try { return localStorage.getItem(k); } catch { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch {} } };
+
+
+  // ---------- 回答：有 Claude 时用 Claude；访客没开或没登录 Claude 时，按简历原文检索回答 ----------
+  const DATA = {"slug": "mojinrui", "name": "莫晋睿", "nameEn": "Jinrui Mo", "email": "846745322@qq.com", "headline": "把散落的用户声音，整理成能上线、能验证的产品", "bio": "爱丁堡大学设计信息学硕士在读。做过 G 端智慧城市 AI 安防、AI 对话产品，也独立做完了几个 C 端软硬件一体化和交互类项目。习惯先看数据和用户，再画原型，最后用测试结果说话。", "links": [], "welcome": "你好，我是莫晋睿的 AI 分身。可以问我他做过的项目、在海康威视做了什么、怎么做用户调研，或者他想找什么样的工作。", "questions": ["在海康威视做了什么？", "时空记忆树是怎么做出来的？", "怎么判断需求优先级？", "做过哪些 AI 相关的产品？", "为什么适合做产品经理？", "怎么联系他？"], "stats": [{"n": "10万+", "l": "条 12345 市民诉求，用 NLP 提炼出 6 大民生痛点"}, {"n": "30+", "l": "个高保真原型，覆盖 AI 安防、独居关怀、便民服务"}, {"n": "500+", "l": "份有效问卷，配合 Kano 模型排定优先级"}, {"n": "37%", "l": "时空记忆树迭代后用户交互满意度的提升"}], "tags": ["产品经理", "用户研究", "AI 产品"], "intro": "爱丁堡大学设计信息学硕士在读。做过 G 端智慧城市 AI 安防、AI 对话产品，也独立做完了几个 C 端软硬件一体化和交互类项目。", "about": ["具备多段产品实习与 **0-1 项目落地**经验，擅长**用户调研、需求优先级判断、原型设计**与产品全链路迭代。", "熟悉 **B/G 端智慧城市 AI 安防产品、AI 对话产品**设计，独立完成多个 **C 端软硬件一体化、交互类产品项目**；擅长通过可用性测试、量化指标验证产品方案，运用 NLP、AI 能力挖掘用户价值，具备跨团队协同推动落地能力。", "对 AI 产品、用户产品有浓厚兴趣，逻辑扎实，善于挖掘用户痛点。"], "quote": "以数据和用户反馈驱动产品持续优化。", "facts": [{"icon": "cap", "k": "教育", "v": "爱丁堡大学 设计信息学硕士 / UIC 计算机本科"}, {"icon": "search", "k": "擅长", "v": "用户调研、需求优先级、原型设计、可用性测试"}, {"icon": "compass", "k": "熟悉方向", "v": "智慧城市 AI 安防、AI 对话产品、软硬件一体化"}, {"icon": "chat", "k": "语言", "v": "普通话 / 英语（全英文授课硕士，可作工作语言）"}, {"icon": "star", "k": "求职意向", "v": "产品经理（AI 产品 / 用户产品）"}], "intent": {"position": "产品经理（AI 产品 / 用户产品）"}, "education": [{"school": "爱丁堡大学", "degree": "硕士", "major": "设计信息学", "startDate": "2025-09", "endDate": "2026-11", "courses": "用户研究与人机交互（HCI）、数据科学与设计、数据驱动型产品设计、信息架构与可视化"}, {"school": "北京师范大学-香港浸会大学联合国际学院（UIC）", "degree": "本科", "major": "计算机科学与技术", "startDate": "2021-09", "endDate": "2025-07", "courses": "Python、Java、数据结构与算法、机器学习、NLP、统计学、线性代数"}], "experience": [{"company": "海康威视", "title": "产品经理实习生", "startDate": "2026-04", "endDate": "2026-08", "description": "项目背景：参与某高新区智慧城市项目（总投资超 2000 万元）智慧社区模块建设，覆盖需求调研、产品设计与功能落地全流程。\n需求调研与产品规划：基于 12345 政务服务平台近三年 10 万+ 条市民诉求数据，使用 Python 完成 NLP 分词、词频统计与可视化分析，提炼出学校教育、施工扰民、公共交通等 6 大民生痛点；设计 13 项需求调研指标并回收 500+ 份有效问卷，结合用户反馈与 Kano 模型 + 重要-紧急四象限排定功能优先级，并按项目交付周期动态调整排期，支撑智慧社区产品规划。\n产品设计与交互迭代：独立负责智慧社区核心产品设计与交互迭代，使用墨刀完成覆盖 AI 安防、独居关怀、便民服务三大核心场景的 30+ 个高保真原型；协同 UI 设计师完成视觉方案落地，组织多轮可用性测试，基于测试反馈持续优化信息架构、操作路径及关键交互，形成可直接支撑开发的产品原型与交互规范。\n功能落地与场景验收：推动 AI 智能安防与独居关怀功能落地，协同开发团队推进产品实施与场景验收；实现高空抛物实时识别成功预警 5 例、电瓶车入梯自动告警 23 次（试运行阶段实测数据）；针对试运行初期高空抛物等场景误报偏高问题，将误报素材回传海康算法训练平台开展定向模型迭代训练，持续压降误报、提升识别准确率；整合出行、用水等多源 IoT 数据构建独居老人风险预警机制，联动社区网格实现 30 分钟内上门响应。"}, {"company": "广东省数业智能科技有限公司", "title": "产品运营与测试实习生", "startDate": "2022-07", "endDate": "2022-08", "description": "项目背景：参与公司 AI 聊天机器人核心产品的质量保障与用户数据体系建设。\n产品测试与缺陷管理：对 AI 核心产品执行 4 轮功能测试，覆盖 30+ 功能模块，从用户与产品双视角进行缺陷溯源与定位；累计提交 20+ 个缺陷，推动研发解决 10+ 项长期遗留问题，缺陷修复率提升约 30%，改善用户体验。\n数据埋点与日志清洗：参与聊天机器人需求落地，基于产品埋点思维编写 Flume 拦截程序，实现每日 10 万+ 条用户日志自动清洗与分类，为用户行为分析与用户画像建设奠定数据基础。"}], "work": [], "projects": [{"name": "生态脉搏 EcoPulse", "role": "项目负责人", "startDate": "2026-05", "endDate": "2026-06", "tech": "策略游戏设计、数值配表、可用性测试、有声思考法、前端开发", "link": "https://ecopulse-cdh8ty8xo-mojinrui-ruizs-projects.vercel.app", "description": "项目背景：将传统环保工具重构为面向留学生的模拟生存策略沙盒游戏，独立完成 0→1 全流程。\n核心机制设计：独立设计「碳预算 + 精力值」双资源博弈模型，将英国 DEFRA 碳排放因子矩阵封装为底层数据表，保证数值系统有据可依。\n全流程交付与验证：负责概念设计、数值配表到前端开发全流程；组织 20+ 名目标用户开展可用性测试与有声思考法调研，根据反馈调优数值平衡与交互路径。"}, {"name": "大学生心理健康平台", "role": "项目负责人", "startDate": "2026-02", "endDate": "2026-03", "tech": "Say-Do-Make、卡片分类法、用户访谈、Figma、信息架构", "description": "项目背景：面向大学生高压场景的集成式心理健康管理平台，负责用户调研、功能规划与原型交付全流程。\n用户调研与痛点挖掘：基于 Say-Do-Make 调研框架，通过卡片分类法开展用户访谈与行为路径分析，挖掘出大学生在高压环境下心理与生理管理脱节的核心痛点，针对性降低与用户流失相关的认知负荷。\n功能规划与原型设计：负责功能规划与核心业务流程设计，使用 Figma 输出高保真原型，落地「情绪快速打卡 + 压力热力图 + 正念引导」集成式心理仪表盘；采用极简卡片式布局优化信息架构，提升数据可视化直观度，经两轮可用性测试迭代交互路径，用户交互满意度提升 30%。"}, {"name": "时空记忆树 The Memory Tree", "role": "项目负责人", "startDate": "2025-10", "endDate": "2025-11", "tech": "软硬件一体化、NLP 情感分析、触碰交互、可用性测试", "video": "media/memory-tree.mp4", "cover": "media/memory-tree.jpg", "description": "项目背景：针对爱丁堡国际艺术节数字档案零散、浏览缺乏沉浸感的痛点，落地交互式情感地图软硬件一体化产品，面向艺术爱好者打造线下沉浸式文旅体验。\n需求与方案设计：梳理档案内容，定义 NLP 情感标签与映射规则，完成海量文本情感主题聚类，实现档案情感可视化呈现。\n功能规划与原型设计：负责实物触碰交互产品方案，定义交互流程、异常兜底逻辑，协同软硬件团队联调，实现手机触碰展品调取对应档案。\n落地交付：开展可用性测试，招募 20+ 名目标用户完成线下体验，迭代后用户交互满意度提升 37%。"}], "leadership": [{"org": "UIC AI 专业学会", "title": "骨干成员 · 竞赛统筹", "description": "负责数学建模、电子竞技大赛等校内外大型竞赛的全流程项目管理与活动统筹，协调多方资源，管理百人级参赛团队。"}], "papers": [{"title": "微调轻量级模型以实现高效的文本风格转换：Gemma 方法", "journal": "DCS-DS 海报大会", "date": "2024", "description": "NLP 项目，入选 2024 年 DCS-DS 海报大会，受邀出席并现场展示。"}], "patents": [], "awards": [{"name": "香洲区小品大赛银奖（学校历史最高荣誉）", "description": "作为核心演员参赛"}], "languages": [{"language": "英语", "level": "工作语言", "proficiency": "全英文授课硕士，可独立撰写英文需求文档与学术、商业报告"}], "itSkills": [{"name": "Figma"}, {"name": "墨刀"}, {"name": "XMind"}, {"name": "Claude / Copilot / Codex 辅助需求分析与原型迭代"}, {"name": "Python"}, {"name": "SQL"}, {"name": "Java"}, {"name": "C"}, {"name": "R"}, {"name": "定性与定量数据分析"}], "certificates": [], "summary": "具备多段产品实习与 0-1 项目落地经验，擅长用户调研、需求优先级判断、原型设计与产品全链路迭代。熟悉 B/G 端智慧城市 AI 安防产品、AI 对话产品设计，独立完成多个 C 端软硬件一体化、交互类产品项目；擅长通过可用性测试、量化指标验证产品方案，运用 NLP、AI 能力挖掘用户价值，具备跨团队协同推动落地能力。对 AI 产品、用户产品有浓厚兴趣，逻辑扎实，善于挖掘用户痛点，以数据和用户反馈驱动产品持续优化。"};
+  const PERSONA = "你是莫晋睿的 AI 分身，代表他回答招聘方和访客的问题。语气真诚、具体、不浮夸；用第三人称称呼他（「晋睿」或「他」）。回答优先引用资料里的具体数字和做法（例如 10 万+ 条诉求、Kano 模型、30+ 个原型、满意度提升 37%）。资料里没有的不要编造，直接说不确定，并建议发邮件联系。不要透露手机号。";
+function localAnswer(pub, question) {
+  const name = pub.name || '我';
+  const q = question.toLowerCase().trim();
+  const span = (a, b) => [a, b || '至今'].filter(Boolean).join('–');
+  const cut = (t, n = 70) => { t = String(t || '').replace(/\s+/g, ' ').trim(); return t.length > n ? t.slice(0, n) + '…' : t; };
+  const list = (items, fmt) => items.map((x, i) => `${i + 1}. ${fmt(x)}`).join('\n');
+  const contact = pub.email ? `可以发邮件到 ${pub.email}` : '可以通过主页上的链接联系';
+  const exp = [...pub.experience, ...pub.work];
+
+  // 寒暄
+  if (/^(你好|您好|hi|hello|嗨|哈喽|在吗|在不在)[!！。.?？\s]*$/i.test(q))
+    return `你好！我是${name}的 AI 助手。你可以问我${name}做过的项目、实习经历、擅长的技能、教育背景，或者怎么联系。`;
+  if (/^(谢谢|感谢|thanks|thank you|好的|ok|嗯)/i.test(q)) return `不客气～还想了解${name}哪方面，随时问我。`;
+
+  // 具体某个项目 / 公司：问到名字就展开讲
+  // 名字的任意一段（中文名、英文名、去掉后缀的简称）出现在问题里都算问到了
+  const aliases = (n) => { const s = String(n || '').toLowerCase(); return [s, ...s.split(/[\s（）()·\-—]+/), s.replace(/(项目|平台|设计|系统|app)$/i, '')].map((x) => x.trim()).filter((x) => x.length >= 2); };
+  const hitP = pub.projects.find((p) => p.name && aliases(p.name).some((a) => q.includes(a)));
+  if (hitP) return `「${hitP.name}」${hitP.role ? `（${hitP.role}）` : ''}${hitP.tech ? `\n技术/工具：${hitP.tech}` : ''}\n${hitP.description || '暂无详细描述。'}`;
+  const hitE = exp.find((e) => e.company && aliases(e.company.replace(/(股份|有限|科技|智能|公司|集团|广东省|北京|上海|杭州|深圳)/g, ' ')).concat(e.company.toLowerCase()).some((a) => q.includes(a)));
+  if (hitE) return `${hitE.company} · ${hitE.title}（${span(hitE.startDate, hitE.endDate)}）\n${hitE.description || '暂无详细描述。'}`;
+
+  const has = (re) => re.test(q);
+  const allText = [...exp.map((e) => [e.company, e.description]), ...pub.projects.map((p) => [p.name, p.description])];
+  // 问做法：优先级、调研、原型、测试……从经历原文里找对应的句子
+  const METHOD = [[/优先级|排期|kano|四象限|判断需求|取舍/i, /优先级|kano|四象限|排期/i], [/调研|访谈|问卷|痛点|用户研究/, /调研|访谈|问卷|痛点|卡片分类/], [/原型|figma|墨刀|交互|信息架构/i, /原型|figma|墨刀|信息架构|交互/i], [/测试|验证|满意度|数据驱动|指标/, /可用性测试|有声思考|满意度|验收|误报/]];
+  for (const [ask, find] of METHOD) {
+    if (!ask.test(q)) continue;
+    const hits = [];
+    for (const [src, d] of allText) for (const line of String(d || '').split(/\n+/)) for (const s of line.replace(/^[^：:]{2,14}[：:]/, '').split(/[；;]/)) if (find.test(s) && hits.length < 3) hits.push(`· ${s.trim()}（${src}）`);
+    if (hits.length) return `${name}的做法，摘几条原话：\n${hits.join('\n')}`;
+  }
+  if (has(/\bai\b|人工智能|大模型|nlp/i)) {
+    const ai = [...exp.filter((e) => /\bai\b|nlp|算法|聊天机器人|机器学习|大模型/i.test(e.description || '')).map((e) => `${e.company}（${e.title}）：${cut(e.description.split('\n').find((l) => /\bai\b|nlp|算法|聊天机器人/i.test(l)) || e.description, 60)}`),
+      ...pub.projects.filter((p) => /\bai\b|nlp|算法|聊天机器人|机器学习|大模型/i.test((p.description || '') + (p.tech || ''))).map((p) => `「${p.name}」：${cut(p.description.split('\n').find((l) => /\bai\b|nlp|算法|聊天机器人/i.test(l)) || p.description, 60)}`)];
+    if (ai.length) return `和 AI 相关的经历：\n${list(ai, (x) => x)}`;
+  }
+  if (has(/项目|作品|做过|做了什么|portfolio|project/)) {
+    if (!pub.projects.length) return `${name}的主页上暂时没有公开项目，${contact}了解更多。`;
+    if (pub.projects.length === 1) { const p = pub.projects[0]; return `${name}做过「${p.name}」${p.role ? `（${p.role}）` : ''}：\n${p.description || ''}`; }
+    return `${name}做过 ${pub.projects.length} 个项目：\n${list(pub.projects, (p) => `「${p.name}」${p.role ? `（${p.role}）` : ''}：${cut(p.description, 40)}`)}\n\n想详细了解哪个，直接问项目名就行。`;
+  }
+  if (has(/实习|工作|经历|公司|上班|experience|intern/)) {
+    if (!exp.length) return `${name}的主页上暂时没有公开实习经历。`;
+    return `${name}的经历：\n${list(exp, (e) => `${e.company} · ${e.title}（${span(e.startDate, e.endDate)}）${e.description ? '：' + cut(e.description, 50) : ''}`)}\n\n想展开哪一段，问公司名就行。`;
+  }
+  if (has(/学校|教育|学历|专业|毕业|读书|大学|硕士|本科|博士|school|education/)) {
+    if (!pub.education.length) return `主页上没有公开教育经历。`;
+    return list(pub.education, (e) => `${span(e.startDate, e.endDate)} ${e.school}${e.college ? ' ' + e.college : ''} · ${e.degree || ''} · ${e.major || ''}`);
+  }
+  if (has(/技能|技术|会什么|擅长|能力|语言|英语|编程|工具|证书|skill/)) {
+    const parts = [
+      pub.itSkills.length && `专业技能：${pub.itSkills.map((x) => x.name + (x.proficiency ? `（${x.proficiency}）` : '')).join('、')}`,
+      pub.languages.length && `外语：${pub.languages.map((l) => [l.language, l.level, l.score].filter(Boolean).join(' ')).join('、')}`,
+      pub.certificates.length && `证书：${pub.certificates.map((c) => c.name).join('、')}`,
+    ].filter(Boolean);
+    return parts.length ? parts.join('\n') : `主页上暂时没有公开技能信息。`;
+  }
+  if (has(/论文|发表|学术|研究|paper/) && pub.papers.length) return list(pub.papers, (x) => `《${x.title}》${[x.journal, x.level].filter(Boolean).join(' · ')}`);
+  if (has(/奖|荣誉|获奖|奖学金|award/) && pub.awards.length) return list(pub.awards, (a) => `${a.date || ''} ${a.name}`);
+  if (has(/社团|学生会|职务|干部|校园/) && pub.leadership.length) return list(pub.leadership, (l) => `${l.org} · ${l.title}${l.description ? '：' + cut(l.description, 50) : ''}`);
+  if (has(/联系|邮箱|邮件|微信|电话|简历|contact|email/)) return `${contact}。`;
+  if (has(/求职|意向|岗位|找工作|想做|方向|城市|base|offer/)) return `求职意向：${pub.intent.position || '暂未填写'}${pub.intent.city ? `\n期望城市：${pub.intent.city}` : ''}`;
+  if (has(/介绍|是谁|简介|自己|关于|优势|特点|为什么|适合/)) return `${pub.headline ? pub.headline + '\n' : ''}${pub.bio || ''}${pub.summary ? '\n' + pub.summary : ''}`.trim() || `我是${name}的 AI 助手。`;
+  return `这个问题我还答不上来～你可以问${name}的项目、经历、技能、教育背景或求职意向；更具体的问题${contact}。`;
+}
+  let sampleP = null, aiOff = false;
+  const getSample = () => (sampleP ||= (window.claude?.use ? window.claude.use('sample').catch(() => null) : Promise.resolve(null)));
+  getSample();
+  async function answer(q, onText) {
+    const sample = aiOff ? null : await getSample();
+    if (sample) {
+      const rules = `${PERSONA}\n\n规则：只依据下面的公开资料回答；资料里没有的内容不要编造，直接说不确定并建议发邮件联系；不要透露手机号；用中文回答，简洁具体，不超过 200 字，不用 Markdown 标题。\n\n公开资料（JSON）：\n${JSON.stringify(DATA)}`;
+      try {
+        const { text } = await sample([{ role: 'user', content: rules }, ...agent.history.slice(-8)], { cache: false, modelTier: 'quick', onText: ({ text }) => onText(text) });
+        return text;
+      } catch (e) {
+        if (['not_granted', 'sampling_disabled', 'not_declared', 'capability_disabled', 'capability_removed', 'session_expired'].includes(e?.code)) aiOff = true;
+        if (e?.code === 'rate_limited') return '现在问得有点多，稍等一会儿再问。下面是简历原文里的相关内容：\n' + localAnswer(DATA, q);
+      }
+    }
+    return localAnswer(DATA, q);
+  }
+
+  // 只给「带量词的数字」划荧光笔：10 万+、500+、37%、30 分钟……年份和热线号码不划
+  const NUM = /(?<![\d\-—–])(\d+(?:\.\d+)?\s*(?:万\s*\+?|千\s*\+?|\+|%|\s*(?:个|条|份|名|项(?!目)|次|例|轮|分钟|人次|倍)))/g;
+  const hl = (t) => esc(t).replace(NUM, '<mark class="hl">$1</mark>');
+
+  // 描述按行拆：「小标题：内容」
+  const lines = (d) => String(d || '').split(/\n+/).map((l) => l.trim()).filter(Boolean).map((l) => {
+    const m = l.match(/^([^：:]{2,14})[：:]\s*(.+)$/);
+    return m ? { head: m[1], text: m[2] } : { head: '', text: l };
+  });
+  const isBg = (x) => /背景|简介|概述/.test(x.head);
+
+  // ---------- 方法：从经历和项目里自动找证据 ----------
+  const STAGES = [
+    { name: '发现', def: '先弄清楚用户真正卡在哪', kws: [['用户调研', /用户调研|需求调研|调研/], ['用户访谈', /访谈/], ['问卷', /问卷/], ['NLP 分词', /NLP|分词/], ['词频分析', /词频/], ['卡片分类法', /卡片分类/], ['Say-Do-Make', /say-do-make/i], ['行为路径', /行为路径/], ['数据埋点', /埋点/], ['日志清洗', /日志|清洗/], ['痛点挖掘', /痛点/]] },
+    { name: '判断', def: '决定先做什么、不做什么', kws: [['Kano 模型', /kano/i], ['重要-紧急四象限', /四象限/], ['优先级', /优先级/], ['排期', /排期/], ['功能规划', /功能规划|产品规划/], ['数值设计', /数值/], ['机制设计', /机制|博弈/]] },
+    { name: '设计', def: '把方案画成能讨论的原型', kws: [['高保真原型', /高保真|原型/], ['Figma', /figma/i], ['墨刀', /墨刀/], ['信息架构', /信息架构/], ['交互规范', /交互流程|交互规范|关键交互|交互路径/], ['数据可视化', /可视化|仪表盘|热力图/], ['软硬件联调', /软硬件|联调/], ['异常兜底', /兜底/]] },
+    { name: '验证', def: '用测试和数据确认它真的有用', kws: [['可用性测试', /可用性测试/], ['有声思考法', /有声思考/], ['满意度', /满意度/], ['场景验收', /验收/], ['误报回流训练', /误报|模型迭代/], ['缺陷管理', /缺陷/], ['功能测试', /功能测试/], ['实测数据', /实测|预警|告警/]] },
+  ];
+  function evidence(p) {
+    const sents = [];
+    const add = (src, d) => lines(d).filter((l) => !isBg(l)).forEach((l) => l.text.split(/[；;]/).map((t) => t.trim().replace(/[。.]$/, '')).filter((t) => t.length > 8).forEach((t) => sents.push({ src, text: t, ord: sents.length })));
+    [...(p.experience || []), ...(p.work || [])].forEach((e) => add(e.company, e.description));
+    (p.projects || []).forEach((x) => add(x.name, x.description));
+    const all = sents.map((s) => s.text).join('\n');
+    return STAGES.map((st, si) => {
+      const kws = st.kws.filter(([, re]) => re.test(all)).map(([label, re]) => ({ label, re, stage: si }));
+      const scored = sents.map((s) => {
+        const hits = kws.filter((k) => k.re.test(s.text)).length;
+        const nums = (s.text.match(NUM) || []).length;
+        return { ...s, score: hits * 3 + nums, hits };
+      }).filter((s) => s.hits).sort((a, b) => b.score - a.score);
+      const pick = [], seen = new Set();
+      for (const s of scored) { if (pick.length >= 3) break; if (seen.has(s.src) && scored.some((o) => !seen.has(o.src) && !pick.includes(o) && o.score >= s.score - 2)) continue; pick.push(s); seen.add(s.src); }
+      // 选出来的按简历顺序排：先实习（按时间），再项目
+      pick.sort((a, b) => a.ord - b.ord);
+      return { ...st, kws, items: pick, sents: scored };
+    });
+  }
+
+  // ---------- 渲染 ----------
+  function render(p) {
+    const st = evidence(p);
+    const exp = [...(p.experience || []), ...(p.work || [])];
+    const sec = [];
+    const nav = [];
+
+    const role = [p.education?.[0] && `${p.education[0].school}${p.education[0].major ? p.education[0].major : ''}${p.education[0].degree || ''}${!p.education[0].endDate || p.education[0].endDate >= new Date().toISOString().slice(0, 7) ? '在读' : ''}`, p.intent?.position && `求职方向：${p.intent.position}`].filter(Boolean).join('，');
+    const hasBoard = st.reduce((n, s) => n + s.kws.length, 0) >= 6;
+    // ① 你好，我是：手写招呼 + 名字 + 贴在白板上的线描头像卡
+    sec.push(`
+    <section class="intro" id="top"><div class="wrap">
+      <div class="intro-text">
+        <p class="hi-cn">你好，我是</p>
+        <p class="hi" lang="en" aria-hidden="true">Hello, my name is</p>
+        <h1>${esc(p.name)}${p.nameEn ? `<span class="en">${esc(p.nameEn)}</span>` : ''}</h1>
+        ${(p.tags || []).length ? `<p class="tags">${p.tags.map((t) => `<span>${esc(t)}</span>`).join('<i aria-hidden="true">/</i>')}</p>` : role ? `<p class="tags"><span>${esc(role)}</span></p>` : ''}
+        ${p.intro || p.bio ? `<p class="lead">${esc(p.intro || p.bio)}</p>` : ''}
+        <div class="cta">
+          ${(p.projects || []).length ? '<a class="btn solid" href="#work">看看我做过什么</a>' : ''}
+          <a class="btn" href="#contact">与我联系</a>
+          <button class="btn ghost" data-open-agent>问 AI 分身</button>
+        </div>
+        <a class="down" href="#about-me">往下看，白板上还有很多</a>
+      </div>
+      <figure class="portrait" aria-label="${esc(p.name)}的线描头像">
+        <span class="tape" aria-hidden="true"></span>
+        <svg viewBox="0 0 240 260" aria-hidden="true">
+          <g fill="none" stroke="var(--ink)" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+            <ellipse cx="124" cy="104" rx="40" ry="44" fill="var(--paper)" />
+            <path d="M86 92 C96 70 118 64 138 70 C152 74 160 84 163 96 C150 86 136 84 122 80 C108 82 96 86 86 92 Z" fill="var(--ink)" />
+            <path d="M108 104 q4 -4 8 0" /><path d="M134 104 q4 -4 8 0" />
+            <path d="M114 122 q10 9 20 0" />
+            <path d="M52 236 C54 188 84 160 124 160 C164 160 194 188 196 236" />
+            <path d="M124 160 v76" stroke="var(--marker)" stroke-width="2.4" />
+          </g>
+          <g font-family="var(--cn)" font-size="12" font-weight="600">
+            <rect x="160" y="172" width="64" height="30" rx="2" fill="var(--note)" transform="rotate(6 192 187)" /><text x="168" y="192" fill="var(--note-ink)" transform="rotate(6 192 187)">用户调研</text>
+            <rect x="14" y="150" width="58" height="30" rx="2" class="n2" transform="rotate(-7 43 165)" /><text x="22" y="170" class="t2" transform="rotate(-7 43 165)">原型</text>
+            <rect x="170" y="22" width="54" height="30" rx="2" class="n3" transform="rotate(-4 197 37)" /><text x="178" y="42" class="t3" transform="rotate(-4 197 37)">验证</text>
+          </g>
+        </svg>
+        <figcaption>${esc(p.name)}，正在白板前整理便利贴</figcaption>
+      </figure>
+    </div></section>`);
+
+    // ② 关于我：写在纸上的自我介绍 + 右侧几张信息卡
+    const md = (t) => esc(t).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
+    const aboutParas = (p.about || []).length ? p.about : (p.summary ? [p.summary] : []);
+    const ICONS = {
+      cap: '<path d="M3 9l9-4 9 4-9 4z"/><path d="M7 11v4c3 2 7 2 10 0v-4"/>',
+      search: '<circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/>',
+      compass: '<circle cx="12" cy="12" r="8"/><path d="M15 9l-2 5-4 1 2-5z"/>',
+      chat: '<path d="M5 18l1-3.5A7 7 0 1 1 9 17z"/>',
+      star: '<path d="M12 4l2.4 5 5.4.6-4 3.7 1.1 5.3L12 16l-4.9 2.6 1.1-5.3-4-3.7 5.4-.6z"/>',
+    };
+    if (aboutParas.length) {
+      nav.push(['about-me', '关于我']);
+      sec.push(`
+      <section class="sec about-me" id="about-me"><div class="wrap">
+        <div class="sec-h"><h2>关于我</h2><p class="hand">一张写在纸上的自我介绍</p></div>
+        <div class="about-grid">
+          <article class="sheet">
+            ${aboutParas.map((t) => `<p>${md(t)}</p>`).join('')}
+            ${p.quote ? `<blockquote>${esc(p.quote)}</blockquote>` : ''}
+          </article>
+          ${(p.facts || []).length ? `<ul class="facts">${p.facts.map((f, i) => `<li style="--r:${[-0.6, 0.5, -0.3, 0.7, -0.5, 0.4][i % 6]}deg"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICONS[f.icon] || ICONS.star}</svg></span><span><small>${esc(f.k)}</small><b>${esc(f.v)}</b></span></li>`).join('')}</ul>` : ''}
+        </div>
+      </div></section>`);
+    }
+
+    // ③ 方法白板（原首屏）
+    sec.push(`
+    <section class="hero" id="board-sec"><div class="wrap${hasBoard ? '' : ' solo'}">
+      <div>
+        ${p.headline ? `<h2 class="headline">${p.headline.split(/(?<=[，,；;])/).map((c) => `<span>${esc(c)}</span>`).join('')}</h2>` : ''}
+        ${p.bio ? `<p class="bio">${esc(p.bio)}</p>` : ''}
+        <div class="cta"><button class="btn solid" data-open-agent>问问我的 AI 分身</button></div>
+      </div>
+      ${hasBoard ? `
+      <div class="board drift" id="board" aria-label="方法白板：可拖动的便利贴，整理后按发现、判断、设计、验证四步归类">
+        <div class="cols" aria-hidden="true">${st.map((s, i) => `<div><b>${i + 1} ${esc(s.name)}</b><small>${esc(s.def)}</small></div>`).join('')}</div>
+        <div class="board-bar">
+          <span class="hint" id="boardHint">这些是我简历里用到的方法。拖一拖，或者点「整理」。</span>
+          <button class="chipbtn" id="motion" aria-pressed="false">暂停动效</button>
+          <button class="chipbtn primary" id="sortBtn">整理成方法</button>
+        </div>
+      </div>` : ''}
+    </div></section>`);
+
+    if ((p.stats || []).length) sec.push(`
+    <section class="stats ink-in" id="stats"><div class="wrap"><ul>${p.stats.map((s) => `<li><span class="n"><mark class="hl">${esc(s.n)}</mark></span><span class="l">${esc(s.l)}</span></li>`).join('')}</ul></div></section>`);
+
+    const edu = p.education || [];
+    const camp = [
+      ...(p.papers || []).map((x) => ({ b: `《${x.title}》`, s: [x.journal, x.date].filter(Boolean).join('，'), d: x.description })),
+      ...(p.leadership || []).map((x) => ({ b: x.org, s: x.title, d: x.description })),
+      ...(p.awards || []).map((x) => ({ b: x.name, s: x.date || '', d: x.description })),
+    ];
+    const skills = [...(p.itSkills || []).map((s) => s.name), ...(p.certificates || []).map((c) => c.name)].filter(Boolean);
+    const langs = (p.languages || []).map((l) => [l.language, l.level].filter(Boolean).join('：') + (l.proficiency ? `。${l.proficiency}` : ''));
+    if (edu.length) {
+      nav.push(['edu', '教育']);
+      sec.push(`
+      <section class="sec" id="edu"><div class="wrap">
+        <div class="sec-h"><h2>教育背景</h2></div>
+        <div class="edu">${edu.map((e) => `<div class="it"><span class="when">${esc(span(e.startDate, e.endDate))}</span><b>${esc(e.school)}</b><span class="deg">${esc([e.major, e.degree].filter(Boolean).join('，'))}</span>${e.courses ? `<p>主修：${esc(e.courses)}</p>` : ''}</div>`).join('')}</div>
+      </div></section>`);
+    }
+    if (exp.length) {
+      nav.push(['exp', '经历']);
+      sec.push(`
+      <section class="sec" id="exp"><div class="wrap">
+        <div class="sec-h"><h2>实习经历</h2><p>${exp.length} 段经历，点开看具体做法和数据。</p></div>
+        <ol class="tl" reversed>${exp.map((e, i) => {
+          const ls = lines(e.description), bg = ls.find(isBg), rest = ls.filter((l) => l !== bg);
+          return `<li>
+            <div class="when">${esc(span(e.startDate, e.endDate))}</div>
+            <div class="ink-in" id="e-${i}">
+              <h3>${esc(e.company)}</h3><p class="title">${esc([e.title, e.department].filter(Boolean).join('，'))}</p>
+              ${bg ? `<p class="lede">${hl(bg.text)}</p>` : ''}
+              ${rest.length ? `<ul class="more" hidden>${rest.map((l) => `<li>${l.head ? `<b>${esc(l.head)}</b>` : ''}${hl(l.text)}</li>`).join('')}</ul>
+              <button class="linkish" data-toggle aria-expanded="false">展开具体做了什么</button>` : ''}
+              <button class="linkish" style="margin-left:16px" data-ask="${esc(`在${e.company}具体做了什么？`)}">问 AI</button>
+            </div></li>`;
+        }).join('')}</ol>
+      </div></section>`);
+    }
+
+    if ((p.projects || []).length) {
+      nav.push(['work', '项目']);
+      sec.push(`
+      <section class="sec" id="work"><div class="wrap">
+        <div class="sec-h"><h2>项目</h2><p>${p.projects.length} 个项目。想知道细节，可以直接问 AI 分身。</p></div>
+        <div>${p.projects.map((x, i) => caseHtml(x, i)).join('')}</div>
+      </div></section>`);
+    }
+
+    if (st.filter((s) => s.items.length).length >= 2) {
+      nav.push(['method', '方法']);
+      sec.push(`
+      <section class="sec" id="method"><div class="wrap">
+        <div class="sec-h"><h2>我怎么做产品</h2><p>从发现问题到验证结果，每一步下面都摘自经历和项目原文。点关键词，只看和它相关的几条。</p></div>
+        <div class="method">${st.map((s, i) => `
+          <div class="step" data-stage="${i}">
+            <div class="no" aria-hidden="true">${i + 1}</div>
+            <h3>${esc(s.name)}</h3><p class="def">${esc(s.def)}</p>
+            <ul>${s.items.map((it) => `<li>${hl(it.text)}<span class="src">${esc(it.src)}</span></li>`).join('')}</ul>
+            ${s.kws.length ? `<div class="kws">${s.kws.map((k) => `<button class="kw" data-kw="${esc(k.label)}" aria-pressed="false">${esc(k.label)}</button>`).join('')}</div>` : ''}
+          </div>`).join('')}
+        </div>
+      </div></section>`);
+    }
+
+    if (camp.length || skills.length || p.summary) {
+      nav.push(['about', '更多']);
+      sec.push(`
+      <section class="sec" id="about"><div class="wrap">
+        <div class="sec-h"><h2>校园与技能</h2><p>学术成果、校园经历，以及平时用的工具。</p></div>
+        <div class="bg">
+          ${camp.length ? `<div><h3>校园与成果</h3>${camp.map((c) => `<div class="it"><b>${esc(c.b)}</b>${c.s ? `<span>${esc(c.s)}</span>` : ''}${c.d ? `<p>${hl(c.d)}</p>` : ''}</div>`).join('')}</div>` : ''}
+          ${skills.length || langs.length ? `<div><h3>工具与技能</h3>${skills.length ? `<div class="skills">${skills.map((s) => `<span>${esc(s)}</span>`).join('')}</div>` : ''}${langs.map((l) => `<p style="font-size:14px;margin:14px 0 0">${esc(l)}</p>`).join('')}</div>` : ''}
+        </div>
+      </div></section>`);
+    }
+
+    nav.push(['contact', '联系']);
+    sec.push(`
+    <section class="contact" id="contact"><div class="wrap">
+      <h2>想聊聊产品、实习或合作？</h2>
+      ${p.email ? `<div class="mail"><a href="mailto:${esc(p.email)}">${esc(p.email)}</a><button class="chipbtn" id="copyMail">复制邮箱</button></div>` : ''}
+      <div class="cta"><button class="btn solid" data-open-agent>先问问 AI 分身</button>${(p.links || []).filter((l) => l.label && safeUrl(l.url)).map((l) => `<a class="btn" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)}</a>`).join('')}</div>
+    </div></section>
+    <footer><div class="wrap"><span>© ${new Date().getFullYear()} ${esc(p.name)}</span><span>AI 分身只根据本页公开资料回答，重要信息请以邮件沟通为准</span></div></footer>`);
+
+    $('#app').innerHTML = sec.join('');
+    $('#nav').innerHTML = nav.map(([id, l]) => `<a href="#${id}" data-spy="${id}">${l}</a>`).join('');
+    $('#me').textContent = p.name;
+    return st;
+  }
+
+  function caseHtml(x, i) {
+    const ls = lines(x.description), bg = ls.find(isBg), rest = ls.filter((l) => l !== bg);
+    const tags = String(x.tech || '').split(/[、,，/]/).map((t) => t.trim()).filter(Boolean);
+    const link = safeUrl(x.link), video = safeUrl(x.video), cover = safeUrl(x.cover);
+    let media;
+    if (video) media = `<div class="media"><video preload="none" playsinline controls ${cover ? `poster="${esc(cover)}"` : ''} src="${esc(video)}" aria-label="${esc(x.name)} 演示视频"></video>
+      <button class="play" data-play aria-label="播放 ${esc(x.name)} 演示视频"><span><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.5v11l9-5.5z" fill="currentColor"/></svg>播放演示</span></button></div>`;
+    else if (cover) media = `<div class="media"><img src="${esc(cover)}" alt="${esc(x.name)}" loading="lazy"></div>`;
+    else {
+      // 没有图片 / 视频：封面放这个项目最有说服力的一个结果（优先百分比）
+      const clauses = rest.flatMap((l) => l.text.split(/[，,；;。]/)).map((c) => c.trim()).filter((c) => c.match(NUM));
+      const best = clauses.find((c) => /%/.test(c)) || clauses.sort((a, b) => b.length - a.length)[0];
+      const num = best ? best.match(NUM)[0].trim() : '';
+      media = `<div class="media typo">${link ? `<a class="open" href="${esc(link)}" target="_blank" rel="noopener">在线体验 ↗</a>` : ''}
+        ${num ? `<div class="res"><span class="big"><mark class="hl">${esc(num)}</mark></span><span class="ctx">${esc(best)}</span></div>` : `<div class="t">${esc(x.name)}</div>`}
+      <div class="tags">${tags.slice(0, 5).map((t, k) => `<span style="--r:${[-2, 1.5, -1, 2, -1.5][k]}deg">${esc(t)}</span>`).join('')}</div></div>`;
+    }
+    return `<article class="case" id="p-${i}">
+      ${media}
+      <div class="ink-in">
+        <p class="when">${esc([span(x.startDate, x.endDate), x.role].filter(Boolean).join('　'))}</p>
+        <h3>${esc(x.name)}</h3>
+        ${bg ? `<p class="lede">${hl(bg.text)}</p>` : ''}
+        ${rest.length ? `<ul class="more">${rest.map((l, k) => `<li ${k >= 1 ? 'data-extra hidden' : ''}>${l.head ? `<b>${esc(l.head)}</b>` : ''}${hl(l.text)}</li>`).join('')}</ul>` : ''}
+        ${tags.length ? `<ul class="tagline">${tags.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>` : ''}
+        <div class="acts">
+          ${rest.length > 1 ? '<button class="btn" data-expand aria-expanded="false">看完整案例</button>' : ''}
+          ${link ? `<a class="btn" href="${esc(link)}" target="_blank" rel="noopener">打开项目 ↗</a>` : ''}
+          <button class="btn" data-ask="${esc(`详细说说「${x.name}」：要解决什么问题，他具体做了什么，结果如何？`)}">问 AI 这个项目</button>
+        </div>
+      </div>
+    </article>`;
+  }
+
+  // ---------- 白板 ----------
+  function board(st) {
+    const el = $('#board');
+    if (!el) return;
+    const notes = [];
+    st.forEach((s, si) => s.kws.slice(0, 6).forEach((k) => notes.push({ ...k, si })));
+    for (const n of notes) {
+      const b = document.createElement('button');
+      b.className = 'note' + (n.si ? ' s' + n.si : '');
+      b.textContent = n.label;
+      b.style.setProperty('--d', (-Math.random() * 6).toFixed(2) + 's');
+      el.append(b);
+      n.el = b;
+    }
+    const pos = (n, x, y, w) => { n.x = x; n.y = y; n.el.style.transform = `translate(${x}px, ${y}px)`; n.el.style.width = w ? w + 'px' : ''; };
+    let sorted = false;
+    const W = () => el.clientWidth, H = () => el.clientHeight - 52;
+    function scatter() {
+      sorted = false; el.classList.remove('sorted'); el.style.height = '';
+      const w = W(), h = H(), cols = Math.max(2, Math.round(Math.sqrt(notes.length * w / h))), rows = Math.ceil(notes.length / cols);
+      const order = notes.map((n, i) => i).sort(() => Math.random() - .5);
+      order.forEach((ni, k) => {
+        const n = notes[ni];
+        n.el.style.width = ''; n.el.classList.remove('wrapnote');
+        const cw = w / cols, ch = h / rows, nw = n.el.offsetWidth, nh = n.el.offsetHeight;
+        const cx = (k % cols) * cw, cy = Math.floor(k / cols) * ch;
+        pos(n, Math.max(8, Math.min(w - nw - 8, cx + Math.random() * Math.max(4, cw - nw))), Math.max(14, Math.min(h - nh - 10, cy + 10 + Math.random() * Math.max(4, ch - nh - 10))));
+        n.el.style.rotate = (Math.random() * 6 - 3).toFixed(1) + 'deg';
+      });
+      $('#sortBtn').textContent = '整理成方法';
+      $('#boardHint').textContent = '这些是我简历里用到的方法。拖一拖，或者点「整理」。';
+    }
+    function sort() {
+      sorted = true; el.classList.add('sorted');
+      const w = W(), cw = w / 4, top = Math.max(...$$('.cols b, .cols small', el).filter((x) => x.offsetParent).map((x) => x.offsetTop + x.offsetHeight)) + 10;
+      // 先定宽（窄屏时便利贴会换行），再按每列实际高度往下排
+      notes.forEach((n) => { n.el.style.width = cw - 12 + 'px'; n.el.style.rotate = '0deg'; });
+      const y = [top, top, top, top];
+      notes.forEach((n, k) => {
+        const ty = y[n.si]; y[n.si] += n.el.offsetHeight + 8;
+        setTimeout(() => pos(n, n.si * cw + 6, ty, cw - 12), reduce ? 0 : k * 35);
+      });
+      // 窄屏换行后列变高：白板跟着长高，别让最后几张被底栏挡住
+      el.style.height = Math.max(Math.max(...y) + 52 + 6, innerWidth <= 640 ? 420 : 460) + 'px';
+      $('#sortBtn').textContent = '打散';
+      $('#boardHint').textContent = '点任意一张便利贴，看它出现在哪段经历里。';
+    }
+    $('#sortBtn').onclick = () => (sorted ? scatter() : sort());
+    const motion = $('#motion');
+    const setMotion = (on) => { el.classList.toggle('drift', on); motion.setAttribute('aria-pressed', String(!on)); motion.textContent = on ? '暂停动效' : '恢复动效'; store.set('rf-motion', on ? '1' : '0'); };
+    motion.onclick = () => setMotion(!el.classList.contains('drift'));
+    setMotion(!reduce && store.get('rf-motion') !== '0');
+
+    // 拖动；没拖动就当点击：弹出这条方法在哪些经历里出现过
+    let pop = null;
+    const closePop = () => { pop?.remove(); pop = null; notes.forEach((n) => n.el.classList.remove('lit')); };
+    for (const n of notes) {
+      n.el.addEventListener('pointerdown', (e) => {
+        if (e.button) return;
+        const sx = e.clientX, sy = e.clientY, ox = n.x, oy = n.y;
+        let moved = false;
+        n.el.setPointerCapture(e.pointerId);
+        const mv = (ev) => {
+          const dx = ev.clientX - sx, dy = ev.clientY - sy;
+          if (!moved && Math.hypot(dx, dy) < 5) return;
+          if (!moved) { moved = true; closePop(); n.el.classList.add('dragging'); }
+          pos(n, Math.max(0, Math.min(W() - n.el.offsetWidth, ox + dx)), Math.max(0, Math.min(H() - n.el.offsetHeight, oy + dy)), sorted ? W() / 4 - 12 : 0);
+        };
+        const up = () => { n.el.removeEventListener('pointermove', mv); n.el.removeEventListener('pointerup', up); n.el.removeEventListener('pointercancel', up); n.el.classList.remove('dragging'); if (moved) n.el.dataset.dragged = '1'; };
+        n.el.addEventListener('pointermove', mv); n.el.addEventListener('pointerup', up); n.el.addEventListener('pointercancel', up);
+      });
+      n.el.addEventListener('click', () => {
+        if (n.el.dataset.dragged) { delete n.el.dataset.dragged; return; }
+        const was = n.el.classList.contains('lit');
+        closePop();
+        if (was) return;
+        n.el.classList.add('lit');
+        const hits = st[n.si].sents.filter((s) => n.re.test(s.text)).slice(0, 2).sort((a, b) => a.ord - b.ord);
+        pop = document.createElement('div');
+        pop.className = 'pop';
+        pop.innerHTML = `<b>${esc(n.label)}　<span style="font-weight:400;color:var(--graphite)">${esc(st[n.si].name)}</span></b>${hits.map((h) => `<p>${hl(h.text)}<br><span class="src">${esc(h.src)}</span></p>`).join('')}
+          <div class="row"><button class="linkish" data-ask="${esc(`他是怎么用「${n.label}」的？举个具体例子`)}">问 AI 具体怎么用</button><button class="chipbtn" data-closepop>关闭</button></div>`;
+        el.append(pop);
+        const w = W(), pw = pop.offsetWidth;
+        pop.style.left = Math.max(12, Math.min(w - pw - 12, n.x + n.el.offsetWidth / 2 - pw / 2)) + 'px';
+        const below = n.y + n.el.offsetHeight + 8;
+        pop.style.top = (below + pop.offsetHeight < H() ? below : Math.max(8, n.y - pop.offsetHeight - 8)) + 'px';
+        $('[data-closepop]', pop).onclick = closePop;
+      });
+    }
+    // 先打散；进入视野后自动整理一次（页面里唯一一次自动的动画）
+    scatter();
+    if (reduce) sort();
+    else {
+      const io = new IntersectionObserver((es) => { if (es[0].isIntersecting) { io.disconnect(); setTimeout(() => !sorted && sort(), 1400); } }, { threshold: .6 });
+      io.observe(el);
+    }
+    let rw = W();
+    addEventListener('resize', () => { if (Math.abs(W() - rw) < 20) return; rw = W(); closePop(); sorted ? sort() : scatter(); });
+  }
+
+  // ---------- 其它交互 ----------
+  function wire(st) {
+    // 荧光笔：滚到时划上
+    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('inked'); io.unobserve(e.target); } }), { threshold: .4 });
+    $$('.ink-in').forEach((x) => (reduce ? x.classList.add('inked') : io.observe(x)));
+
+    // 方法关键词筛选
+    $$('.kw').forEach((b) => b.onclick = () => {
+      const step = b.closest('.step'), si = +step.dataset.stage, on = b.getAttribute('aria-pressed') !== 'true';
+      $$('.kw', step).forEach((x) => x.setAttribute('aria-pressed', 'false'));
+      const ul = $('ul', step);
+      const s = st[si];
+      const kw = s.kws.find((k) => k.label === b.dataset.kw);
+      const items = on ? s.sents.filter((x) => kw.re.test(x.text)).slice(0, 3).sort((a, b) => a.ord - b.ord) : s.items;
+      if (on) b.setAttribute('aria-pressed', 'true');
+      ul.innerHTML = items.map((it) => `<li class="${on ? 'lit' : ''}">${hl(it.text)}<span class="src">${esc(it.src)}</span></li>`).join('');
+    });
+
+    // 视频：点封面播放
+    $$('[data-play]').forEach((b) => b.onclick = () => { const v = $('video', b.parentElement); b.remove(); v.preload = 'auto'; v.play().catch(() => {}); });
+    // 项目案例展开
+    $$('[data-expand]').forEach((b) => b.onclick = () => {
+      const box = b.closest('.ink-in'), open = b.getAttribute('aria-expanded') !== 'true';
+      $$('[data-extra]', box).forEach((li) => (li.hidden = !open));
+      b.setAttribute('aria-expanded', String(open)); b.textContent = open ? '收起' : '看完整案例';
+    });
+    // 经历展开
+    $$('[data-toggle]').forEach((b) => b.onclick = () => {
+      const ul = b.previousElementSibling, open = ul.hidden;
+      ul.hidden = !open; b.setAttribute('aria-expanded', String(open)); b.textContent = open ? '收起' : '展开具体做了什么';
+    });
+    $('#copyMail')?.addEventListener('click', async (e) => {
+      const t = $('.mail a').textContent;
+      try { await navigator.clipboard.writeText(t); e.target.textContent = '已复制'; } catch { e.target.textContent = '复制失败，请手动选择'; }
+      setTimeout(() => (e.target.textContent = '复制邮箱'), 2000);
+    });
+    // 导航高亮当前分区
+    const links = $$('[data-spy]');
+    const spy = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) links.forEach((a) => a.classList.toggle('on', a.dataset.spy === e.target.id)); }), { rootMargin: '-45% 0px -50% 0px' });
+    links.forEach((a) => { const s = document.getElementById(a.dataset.spy); if (s) spy.observe(s); });
+    // 首屏之后显示悬浮按钮
+    const hero = $('.intro');
+    if (hero) new IntersectionObserver((es) => $('#fab').classList.toggle('on', !es[0].isIntersecting && !agent.open), { threshold: 0 }).observe(hero);
+  }
+
+  // ---------- AI 分身 ----------
+  const agent = { open: false, history: [], asked: new Set(), suggestions: [], follow: [] };
+  function openAgent(q) {
+    agent.open = true;
+    $('#agent').classList.add('open'); $('#agent').setAttribute('aria-hidden', 'false');
+    $('#scrim').classList.add('on'); $('#fab').classList.remove('on');
+    if (q) ask(q); else setTimeout(() => $('#q').focus(), 50);
+  }
+  function closeAgent() {
+    agent.open = false;
+    $('#agent').classList.remove('open'); $('#agent').setAttribute('aria-hidden', 'true');
+    $('#scrim').classList.remove('on');
+    if (scrollY > innerHeight * .8) $('#fab').classList.add('on');
+  }
+  function addMsg(role, text) {
+    const d = document.createElement('div');
+    d.className = 'msg ' + (role === 'user' ? 'me' : 'bot');
+    d.textContent = text;
+    $('#msgs').append(d); $('#msgs').scrollTop = 1e9;
+    return d;
+  }
+  function renderSugg(extra = []) {
+    agent.follow = [...new Set([...extra, ...agent.follow])].filter((x) => !agent.asked.has(x));
+    const list = [...new Set([...agent.follow.slice(0, 2), ...agent.suggestions])].filter((x) => !agent.asked.has(x)).slice(0, 4);
+    $('#sugg').innerHTML = '';
+    for (const s of list) { const b = document.createElement('button'); b.textContent = s; b.onclick = () => ask(s); $('#sugg').append(b); }
+  }
+  async function ask(q) {
+    q = String(q || '').trim();
+    if (!q || ask.busy) return;
+    ask.busy = true; agent.asked.add(q);
+    $('#sugg').innerHTML = ''; $('#askForm button').disabled = true;
+    addMsg('user', q); agent.history.push({ role: 'user', content: q });
+    const t = addMsg('bot', '正在想'); t.classList.add('typing');
+    try {
+      const d = { answer: await answer(q, (text) => { t.textContent = text; t.classList.remove('typing'); $('#msgs').scrollTop = 1e9; }) };
+      t.textContent = d.answer; t.classList.remove('typing');
+      agent.history.push({ role: 'assistant', content: d.answer });
+      const pub = window.__pub || {}, follow = [];
+      for (const x of pub.projects || []) if (x.name && d.answer.includes(x.name.split(/\s/)[0]) && !q.includes(x.name.split(/\s/)[0])) follow.push(`详细说说「${x.name}」`);
+      for (const e of [...(pub.experience || []), ...(pub.work || [])]) if (e.company && d.answer.includes(e.company) && !q.includes(e.company)) follow.push(`在${e.company}具体做了什么？`);
+      renderSugg(follow.slice(0, 2));
+    } catch (e) {
+      t.textContent = `没能拿到回答：${e.message}。可以稍后再试，或者直接发邮件。`; t.classList.remove('typing');
+      renderSugg();
+    } finally { ask.busy = false; $('#askForm button').disabled = false; $('#q').focus({ preventScroll: true }); }
+  }
+
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('[data-ask]');
+    if (a) { e.preventDefault(); openAgent(a.dataset.ask); return; }
+    if (e.target.closest('[data-open-agent]')) openAgent();
+  });
+  $('#closeAgent').onclick = closeAgent;
+  $('#scrim').onclick = closeAgent;
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && agent.open) closeAgent(); });
+  $('#askForm').onsubmit = (e) => { e.preventDefault(); const q = $('#q').value; if (!q.trim() || ask.busy) return; $('#q').value = ''; ask(q); };
+
+  (async () => {
+    const p = DATA;
+    window.__pub = p;
+    document.title = `${p.name}${p.headline ? ' · ' + p.headline : ' · 个人主页'}`;
+    const st = render(p);
+    board(st);
+    wire(st);
+    $('#agentTitle').textContent = `${p.name}的 AI 分身`;
+    addMsg('bot', p.welcome || `你好，我是${p.name}的 AI 分身。可以问我${p.name}的项目、经历、做事方法，或者求职意向。`);
+    agent.suggestions = p.questions?.length ? p.questions : ['做过哪些项目？', '有什么实习经历？', '擅长什么？', '在哪里读书？', '求职意向是什么？', '怎么联系？'];
+    renderSugg();
+    if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView();
+  })();
+})();
+
+</script>
+</body>
+</html>
