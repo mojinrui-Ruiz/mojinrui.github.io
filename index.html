@@ -1,11 +1,4 @@
-<!doctype html>
-<html lang="zh-CN">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta property="og:title" content="莫晋睿 · 个人主页">
-<meta property="og:description" content="产品经理 / 用户研究 / AI 产品：项目、实习经历和可以提问的 AI 分身">
-<meta property="og:image" content="/media/memory-tree.jpg">
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>莫晋睿 · 个人主页</title>
 <meta name="description" content="莫晋睿的个人主页：产品方法、项目、实习经历和 AI 分身">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,19 +19,7 @@
   --latin: 'Archivo', -apple-system, BlinkMacSystemFont, sans-serif;
   --cn: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
   --font: var(--latin), var(--cn);
-  color-scheme: light;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --board: #0f1520; --paper: #172030; --ink: #e7ebf2; --graphite: #9aa5b6; --rule: #2b3648;
-    --marker: #8aa6ff; --marker-soft: #1f2c4d; --hl: #8a7300; --note: #3a3418; --note-ink: #f3e7a6;
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --board: #0f1520; --paper: #172030; --ink: #e7ebf2; --graphite: #9aa5b6; --rule: #2b3648;
-  --marker: #8aa6ff; --marker-soft: #1f2c4d; --hl: #8a7300; --note: #3a3418; --note-ink: #f3e7a6;
-  color-scheme: dark;
+  color-scheme: light only;
 }
 
 * { box-sizing: border-box; }
@@ -104,8 +85,6 @@ mark.hl {
   border: 1.5px solid var(--ink); background: transparent; color: var(--ink); text-decoration: none; font-weight: 600; font-size: 15px;
 }
 .btn.solid { background: var(--marker); border-color: var(--marker); color: #fff; }
-:root[data-theme="dark"] .btn.solid { color: #0f1520; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn.solid { color: #0f1520; } }
 .btn:hover { background: var(--marker-soft); }
 .btn.solid:hover { background: var(--marker); filter: brightness(1.08); }
 .hero .wrap.solo { grid-template-columns: minmax(0, 1fr); }
@@ -138,8 +117,7 @@ mark.hl {
 .note.s1 { background: #d9f0ff; color: #0c3a5c; }
 .note.s2 { background: #ffe0d6; color: #5c1d0c; }
 .note.s3 { background: #e3f6d8; color: #23440f; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .note.s1 { background: #173550; color: #cfe8ff; } :root:not([data-theme="light"]) .note.s2 { background: #4a2418; color: #ffd9cc; } :root:not([data-theme="light"]) .note.s3 { background: #1f3a17; color: #d8f2c8; } }
-:root[data-theme="dark"] .note.s1 { background: #173550; color: #cfe8ff; } :root[data-theme="dark"] .note.s2 { background: #4a2418; color: #ffd9cc; } :root[data-theme="dark"] .note.s3 { background: #1f3a17; color: #d8f2c8; }
+
 .board.sorted .note { white-space: normal; text-align: left; }
 .note.dragging { transition: none; cursor: grabbing; z-index: 4; }
 .note.lit { outline: 2px solid var(--marker); }
@@ -236,7 +214,13 @@ mark.hl {
 
 /* 教育背景：两所学校并排 */
 .edu { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1.5px solid var(--ink); }
-.edu .it { padding: 22px 28px 8px 0; display: flex; flex-direction: column; gap: 4px; }
+.edu .it { padding: 22px 28px 8px 0; display: flex; gap: 18px; align-items: flex-start; }
+.edu .info { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.edu .crest { flex: none; width: 80px; height: 80px; box-sizing: border-box; padding: 8px; display: flex; align-items: center; justify-content: center; background: #fff; border: 1px solid var(--rule); border-radius: 16px; overflow: hidden; }
+.edu .crest img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.edu .crest .mono { font-family: var(--latin), var(--cn); font-stretch: 112%; font-weight: 800; font-size: 15px; color: var(--marker); letter-spacing: .02em; }
+.edu .badge { align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; padding: 2px 10px 2px 8px; border-radius: 999px; background: var(--hl); color: var(--ink); }
+.edu .badge::before { content: '★'; font-size: 11px; }
 .edu .it + .it { padding-left: 28px; border-left: 1px solid var(--rule); }
 .edu .when { color: var(--graphite); font-size: 14px; font-variant-numeric: tabular-nums; }
 .edu b { font-size: clamp(20px, 2.2vw, 24px); line-height: 1.35; }
@@ -324,8 +308,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: s
 .portrait figcaption { text-align: center; color: var(--graphite); font-size: 13px; margin-top: 4px; }
 .portrait .n2 { fill: #ffe0d6; } .portrait .t2 { fill: #5c1d0c; }
 .portrait .n3 { fill: #d9f0ff; } .portrait .t3 { fill: #0c3a5c; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .portrait .n2 { fill: #4a2418; } :root:not([data-theme="light"]) .portrait .t2 { fill: #ffd9cc; } :root:not([data-theme="light"]) .portrait .n3 { fill: #173550; } :root:not([data-theme="light"]) .portrait .t3 { fill: #cfe8ff; } }
-:root[data-theme="dark"] .portrait .n2 { fill: #4a2418; } :root[data-theme="dark"] .portrait .t2 { fill: #ffd9cc; } :root[data-theme="dark"] .portrait .n3 { fill: #173550; } :root[data-theme="dark"] .portrait .t3 { fill: #cfe8ff; }
+
 @media (max-width: 860px) { .intro .wrap { grid-template-columns: 1fr; gap: 36px; } .portrait { width: min(300px, 86%); } .intro { padding-top: 32px; } }
 
 /* ---------- ② 关于我 ---------- */
@@ -352,9 +335,166 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: s
 #board-sec .headline { font-size: clamp(26px, 3vw, 34px); line-height: 1.35; margin: 0 0 14px; max-width: 14em; text-wrap: balance; }
 #board-sec .headline span { display: inline-block; }
 
+/* ---------- 项目卡片：封面可点进详情 ---------- */
+a.media { display: block; background: #f3f5f8; border: 1.5px solid var(--rule); }
+a.media img { object-fit: cover; object-position: top center; transition: scale .4s; }
+a.media:hover img { scale: 1.02; }
+
+/* ---------- 项目详情页：Notion 风格的白纸文档 ---------- */
+.detail { background: var(--paper); min-height: 100vh; padding-bottom: 80px; --dg: #f7f6f3; --dline: #e9e9e7; --dtext: #37352f; --dmute: #787774; }
+.dcover { height: clamp(150px, 26vw, 280px); overflow: hidden; background: var(--marker-soft); border-bottom: 1px solid var(--dline); }
+.dcover img { width: 100%; height: 100%; object-fit: cover; object-position: center 18%; }
+.dcover.plain { background: linear-gradient(135deg, var(--marker-soft), #fff7c2); display: grid; place-items: center; }
+.dpat { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 14px; max-width: 760px; padding: 0 20px; }
+.dpat span { background: var(--note); color: var(--note-ink); padding: 6px 12px; font-weight: 600; font-size: 14px; box-shadow: 0 6px 12px -8px rgba(0,0,0,.35); }
+.dpat span:nth-child(odd) { rotate: -2deg; } .dpat span:nth-child(even) { rotate: 1.5deg; }
+.dwrap { display: grid; grid-template-columns: minmax(0, 760px) 200px; gap: 56px; justify-content: center; }
+.doc { min-width: 0; color: var(--dtext); font-size: 16px; line-height: 1.75; }
+.dback { display: inline-block; margin: 18px 0 0; font-size: 14px; color: var(--dmute); text-decoration: none; padding: 4px 8px; margin-left: -8px; border-radius: 6px; }
+.dback:hover { background: var(--dg); color: var(--dtext); }
+.dicon { width: 72px; height: 72px; margin-top: -2px; display: grid; place-items: center; border-radius: 14px; background: var(--paper); border: 2px solid var(--ink);
+  font: 800 28px/1 var(--latin); color: var(--marker); box-shadow: 4px 5px 0 -1px color-mix(in srgb, var(--ink) 14%, transparent); position: relative; top: -2px; margin-top: 18px; }
+.doc h1 { font-size: clamp(30px, 4.4vw, 42px); line-height: 1.2; margin: 18px 0 8px; color: var(--ink); }
+.dlede { font-size: 18px; color: var(--dmute); margin: 0 0 22px; }
+.doc h2 { font-size: 23px; line-height: 1.35; margin: 44px 0 10px; color: var(--ink); padding-bottom: 6px; border-bottom: 1px solid var(--dline); scroll-margin-top: 80px; }
+.doc p { margin: 8px 0; }
+.doc b { font-weight: 700; color: var(--ink); }
+.props { margin: 0 0 24px; padding: 6px 0; border-top: 1px solid var(--dline); border-bottom: 1px solid var(--dline); }
+.props div { display: grid; grid-template-columns: 96px 1fr; gap: 12px; padding: 5px 0; font-size: 14.5px; }
+.props dt { color: var(--dmute); }
+.props dd { margin: 0; }
+.callout { display: flex; gap: 12px; background: var(--dg); border-radius: 6px; padding: 14px 16px; margin: 16px 0; }
+.callout .ci { color: var(--marker); flex: none; line-height: 1.75; }
+.callout p { margin: 0; }
+.dl { margin: 8px 0; padding-left: 1.3em; }
+.dl li { margin: 4px 0; }
+.dl li::marker { color: var(--dmute); }
+.dstats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 16px 0; }
+.dstats div { border: 1px solid var(--dline); border-radius: 8px; padding: 14px 14px 12px; }
+.dstats b { display: block; font: 800 28px/1.15 var(--font); color: var(--marker); font-variant-numeric: tabular-nums; }
+.dstats span { display: block; font-size: 13.5px; color: var(--dmute); margin-top: 4px; line-height: 1.5; }
+.bars { margin: 18px 0; padding: 16px 18px; border: 1px solid var(--dline); border-radius: 8px; }
+.bars figcaption { font-weight: 700; font-size: 15px; margin-bottom: 8px; color: var(--ink); }
+.bar { display: grid; grid-template-columns: minmax(0, 13em) minmax(0, 1fr) 4em; gap: 12px; align-items: center; font-size: 14px; padding: 4px 0; }
+.bar .tr { height: 12px; background: var(--dg); border-radius: 6px; overflow: hidden; }
+.bar .tr i { display: block; height: 100%; background: #c4cad3; border-radius: 6px; }
+.bar.on .tr i { background: var(--marker); }
+.bar .bv { text-align: right; font-variant-numeric: tabular-nums; color: var(--dmute); }
+.bar.on .bv { color: var(--ink); font-weight: 700; }
+.note-s { font-size: 13.5px; color: var(--dmute); margin: 10px 0 0 !important; }
+.tbl { overflow-x: auto; margin: 16px 0; border: 1px solid var(--dline); border-radius: 8px; }
+.tbl table { border-collapse: collapse; width: 100%; font-size: 14px; line-height: 1.6; min-width: 520px; }
+.tbl th, .tbl td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--dline); }
+.tbl thead th { background: var(--dg); color: var(--dmute); font-weight: 600; font-size: 13px; white-space: nowrap; }
+.tbl tbody th { font-weight: 600; color: var(--ink); min-width: 6.5em; }
+.tbl tr:last-child > * { border-bottom: 0; }
+.tbl td + td, .tbl th + td, .tbl th + th { border-left: 1px solid var(--dline); }
+/* 四象限 */
+.quad { margin: 20px 0; display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto auto auto; gap: 6px 10px; }
+.quad .qy { grid-row: 1; grid-column: 1; writing-mode: vertical-rl; display: flex; justify-content: space-between; font-size: 12.5px; color: var(--dmute); text-orientation: upright; letter-spacing: 2px; }
+.quad .qbox { grid-row: 1; grid-column: 2; position: relative; display: grid; grid-template-columns: 1fr 1fr; border: 1.5px solid var(--ink); border-radius: 8px; overflow: hidden; min-height: 380px; }
+.quad .qc { padding: 10px 12px; border-color: var(--dline); border-style: solid; border-width: 0; }
+.quad .q0 { border-right-width: 1px; border-bottom-width: 1px; background: color-mix(in srgb, var(--marker-soft) 60%, #fff); }
+.quad .q1 { border-bottom-width: 1px; } .quad .q2 { border-right-width: 1px; }
+.quad .q3 { background: var(--dg); }
+.quad .qt { font-size: 13px; font-weight: 700; color: var(--dmute); }
+.quad .q0 .qt { color: var(--marker); }
+.quad .qx { grid-row: 2; grid-column: 2; display: flex; justify-content: space-between; font-size: 12.5px; color: var(--dmute); }
+.quad figcaption { grid-row: 3; grid-column: 1 / -1; font-size: 13.5px; color: var(--dmute); margin-top: 6px; }
+.quad .qlist { display: none; }
+.qdots { position: absolute; inset: 34px 22px 18px; pointer-events: none; }
+.qd { position: absolute; translate: -50% 50%; white-space: nowrap; background: var(--paper); border: 1.5px solid var(--ink); border-radius: 999px; padding: 3px 10px; font-size: 13px; font-weight: 600; color: var(--ink); box-shadow: 0 2px 0 var(--ink); }
+.qd em, .qlist em { font-style: normal; font-size: 11px; font-weight: 700; margin-left: 6px; color: var(--marker); }
+.quad.only .qbox { min-height: 0; }
+.quad.only .qc { padding: 18px 16px; min-height: 120px; display: flex; align-items: center; }
+.quad.only .qt { font-size: 15px; color: var(--dtext); font-weight: 600; line-height: 1.55; }
+.quad.only .q2 { background: color-mix(in srgb, var(--hl) 28%, #fff); }
+.quad.only .q2 .qt, .quad.only .q0 .qt { color: var(--ink); }
+.quad.only .q0 { background: color-mix(in srgb, var(--marker-soft) 60%, #fff); }
+.quad.only .q1 { background: var(--dg); } .quad.only .q1 .qt { color: var(--dmute); }
+.quad.only .q3 { background: #fdecec; }
+@media (max-width: 640px) {
+  .quad .qbox { min-height: 0; }
+  .qdots { display: none; }
+  .quad .qlist { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; margin: 8px 0 0; padding: 0; }
+  .quad .qlist li { background: var(--paper); border: 1px solid var(--ink); border-radius: 999px; padding: 2px 8px; font-size: 12.5px; font-weight: 600; }
+  .quad .qlist em { margin-left: 4px; }
+  .quad.only .qc { min-height: 0; padding: 12px; }
+  .quad.only .qt { font-size: 14px; }
+}
+/* 循环 */
+.loop { margin: 20px 0; padding: 18px; border: 1px solid var(--dline); border-radius: 8px; }
+.loop ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 0; }
+.loop li { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 15px; background: var(--note); color: var(--note-ink); padding: 8px 14px; border-radius: 6px; }
+.loop li + li { margin-left: 30px; position: relative; }
+.loop li + li::before { content: '→'; position: absolute; left: -22px; font-family: var(--latin); color: var(--dmute); font-weight: 400; }
+.loop .n { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--paper); font: 700 12px/1 var(--latin); color: var(--note-ink); }
+.loop .back { margin-top: 12px; font-size: 13.5px; color: var(--marker); font-weight: 600; }
+.loop figcaption { font-size: 13.5px; color: var(--dmute); margin-top: 6px; }
+/* 图片 */
+.gal { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
+.gal figure, .dimg { margin: 0; }
+.dimg { margin: 16px 0; }
+.dimg.narrow { max-width: 560px; }
+.zoom { display: block; width: 100%; padding: 0; border: 1px solid var(--dline); border-radius: 8px; overflow: hidden; background: var(--dg); cursor: zoom-in; }
+.zoom img { display: block; width: 100%; height: auto; }
+.gal figcaption, .dimg figcaption { font-size: 13px; color: var(--dmute); margin-top: 6px; line-height: 1.5; }
+@media (max-width: 560px) { .gal { grid-template-columns: 1fr; } .bar { grid-template-columns: 1fr 3.4em; } .bar .bl { grid-column: 1 / -1; } }
+.lb { position: fixed; inset: 0; z-index: 80; background: rgba(15, 20, 30, .88); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 48px 16px 24px; cursor: zoom-out; }
+.lb img { max-width: 100%; max-height: calc(100vh - 120px); object-fit: contain; border-radius: 6px; background: #fff; }
+.lb p { color: #fff; font-size: 14px; margin: 12px 0 0; text-align: center; }
+.lb .x { position: absolute; top: 10px; right: 14px; background: none; border: 0; color: #fff; font-size: 32px; line-height: 1; cursor: pointer; }
+/* Figma 嵌入 */
+.embed { border: 1px solid var(--dline); border-radius: 8px; padding: 16px; margin: 16px 0; background: var(--dg); }
+.em-h b { display: block; color: var(--ink); }
+.em-h span { font-size: 13.5px; color: var(--dmute); }
+.embed .acts { margin-top: 12px; }
+.embed iframe { display: block; width: 100%; height: min(70vh, 640px); border: 1px solid var(--dline); border-radius: 6px; margin-top: 12px; background: #fff; }
+/* 折叠块 */
+.tg { margin: 4px 0; }
+.tg summary { cursor: pointer; font-weight: 600; padding: 6px 4px; border-radius: 6px; list-style: none; display: flex; gap: 8px; }
+.tg summary::-webkit-details-marker { display: none; }
+.tg summary::before { content: '▸'; color: var(--dmute); transition: rotate .15s; display: inline-block; }
+.tg[open] summary::before { rotate: 90deg; }
+.tg summary:hover { background: var(--dg); }
+.tg > div { padding: 0 0 6px 26px; }
+/* 页脚 + 目录 */
+.dfoot { margin-top: 48px; padding-top: 22px; border-top: 1px solid var(--dline); }
+.pn { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 22px; }
+.pn a { border: 1px solid var(--dline); border-radius: 8px; padding: 12px 14px; text-decoration: none; color: var(--ink); font-weight: 600; font-size: 15px; }
+.pn a:hover { background: var(--dg); }
+.pn small { display: block; color: var(--dmute); font-weight: 400; font-size: 12.5px; }
+.pn .nx { text-align: right; grid-column: 2; }
+.toc { position: sticky; top: 88px; align-self: start; margin-top: 120px; display: flex; flex-direction: column; gap: 2px; font-size: 13.5px; }
+.toc b { font-size: 12px; color: var(--dmute); font-weight: 600; margin-bottom: 6px; }
+.toc a { color: var(--dmute); text-decoration: none; padding: 3px 8px; border-left: 2px solid var(--dline); }
+.toc a:hover { color: var(--ink); border-left-color: var(--marker); }
+@media (max-width: 1100px) { .dwrap { grid-template-columns: minmax(0, 760px); } .toc { display: none; } }
+@media (max-width: 640px) { .props div { grid-template-columns: 72px 1fr; } .doc h2 { font-size: 20px; margin-top: 36px; } .dlede { font-size: 16.5px; } .pn { grid-template-columns: 1fr; } .pn .nx { grid-column: 1; } }
+/* 页面拆解：截图 + 标注 */
+.scr { margin: 16px 0; display: grid; gap: 18px; }
+.scr-i { display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 28px; align-items: start; padding: 20px; border: 1px solid var(--dline); border-radius: 10px; }
+.scr-i.two { grid-template-columns: 400px minmax(0, 1fr); }
+.scr-img { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 10px; }
+.scr-img .zoom { border-radius: 14px; border-color: #d9dee5; box-shadow: 0 10px 24px -16px rgba(21, 33, 59, .5); }
+.scr-tag { font: 600 12px/1 var(--latin), var(--cn); color: var(--marker); letter-spacing: .04em; }
+.scr-t h3 { font-size: 20px; margin: 8px 0 10px; color: var(--ink); }
+.scr-t ol { margin: 0; padding: 0; list-style: none; counter-reset: s; display: grid; gap: 10px; }
+.scr-t li { counter-increment: s; display: grid; grid-template-columns: 22px 1fr; gap: 10px; font-size: 15px; line-height: 1.65; }
+.scr-t li::before { content: counter(s); display: grid; place-items: center; width: 22px; height: 22px; margin-top: 2px; border-radius: 50%; background: var(--marker-soft); color: var(--marker); font: 700 12px/1 var(--latin); }
+@media (max-width: 720px) {
+  .scr-i, .scr-i.two { grid-template-columns: 1fr; gap: 16px; padding: 14px; }
+  .scr-img { max-width: 230px; } .scr-i.two .scr-img { max-width: 400px; }
+}
+/* 横屏截图（网页产品）：图在上，说明在下 */
+.scr-i.wide, .scr-i.wide.two { grid-template-columns: 1fr; gap: 18px; }
+.scr-i.wide .scr-img { max-width: none; }
+.scr-i.wide .zoom { border-radius: 8px; background: #0b0f14; }
+.scr-i.wide.two .scr-img { align-items: start; }
+.scr-i.wide .scr-t ol { columns: auto; }
+@media (min-width: 900px) { .scr-i.wide .scr-t { display: grid; grid-template-columns: 180px 1fr; gap: 0 24px; } .scr-i.wide .scr-t h3 { margin-top: 6px; } .scr-i.wide .scr-tag { grid-column: 1; } .scr-i.wide .scr-t h3 { grid-column: 1; } .scr-i.wide .scr-t ol { grid-column: 2; grid-row: 1 / span 2; } }
+
 </style>
-</head>
-<body>
 <header class="top"><div class="wrap">
   <a class="me" href="#top" id="me">个人主页</a>
   <nav aria-label="页面导航" id="nav"></nav>
@@ -362,6 +502,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: s
 </div></header>
 
 <main id="app"><div class="wrap empty"><p>正在加载…</p></div></main>
+<main id="detail" class="detail" hidden></main>
 
 <button class="ask-btn fab" id="fab" data-open-agent aria-label="打开 AI 分身"><span class="dot" aria-hidden="true"></span>问 AI 分身</button>
 <div class="scrim" id="scrim"></div>
@@ -389,8 +530,8 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: s
 
 
   // ---------- 回答：有 Claude 时用 Claude；访客没开或没登录 Claude 时，按简历原文检索回答 ----------
-  const DATA = {"slug": "mojinrui", "name": "莫晋睿", "nameEn": "Jinrui Mo", "email": "846745322@qq.com", "headline": "把散落的用户声音，整理成能上线、能验证的产品", "bio": "爱丁堡大学设计信息学硕士在读。做过 G 端智慧城市 AI 安防、AI 对话产品，也独立做完了几个 C 端软硬件一体化和交互类项目。习惯先看数据和用户，再画原型，最后用测试结果说话。", "links": [], "welcome": "你好，我是莫晋睿的 AI 分身。可以问我他做过的项目、在海康威视做了什么、怎么做用户调研，或者他想找什么样的工作。", "questions": ["在海康威视做了什么？", "时空记忆树是怎么做出来的？", "怎么判断需求优先级？", "做过哪些 AI 相关的产品？", "为什么适合做产品经理？", "怎么联系他？"], "stats": [{"n": "10万+", "l": "条 12345 市民诉求，用 NLP 提炼出 6 大民生痛点"}, {"n": "30+", "l": "个高保真原型，覆盖 AI 安防、独居关怀、便民服务"}, {"n": "500+", "l": "份有效问卷，配合 Kano 模型排定优先级"}, {"n": "37%", "l": "时空记忆树迭代后用户交互满意度的提升"}], "tags": ["产品经理", "用户研究", "AI 产品"], "intro": "爱丁堡大学设计信息学硕士在读。做过 G 端智慧城市 AI 安防、AI 对话产品，也独立做完了几个 C 端软硬件一体化和交互类项目。", "about": ["具备多段产品实习与 **0-1 项目落地**经验，擅长**用户调研、需求优先级判断、原型设计**与产品全链路迭代。", "熟悉 **B/G 端智慧城市 AI 安防产品、AI 对话产品**设计，独立完成多个 **C 端软硬件一体化、交互类产品项目**；擅长通过可用性测试、量化指标验证产品方案，运用 NLP、AI 能力挖掘用户价值，具备跨团队协同推动落地能力。", "对 AI 产品、用户产品有浓厚兴趣，逻辑扎实，善于挖掘用户痛点。"], "quote": "以数据和用户反馈驱动产品持续优化。", "facts": [{"icon": "cap", "k": "教育", "v": "爱丁堡大学 设计信息学硕士 / UIC 计算机本科"}, {"icon": "search", "k": "擅长", "v": "用户调研、需求优先级、原型设计、可用性测试"}, {"icon": "compass", "k": "熟悉方向", "v": "智慧城市 AI 安防、AI 对话产品、软硬件一体化"}, {"icon": "chat", "k": "语言", "v": "普通话 / 英语（全英文授课硕士，可作工作语言）"}, {"icon": "star", "k": "求职意向", "v": "产品经理（AI 产品 / 用户产品）"}], "intent": {"position": "产品经理（AI 产品 / 用户产品）"}, "education": [{"school": "爱丁堡大学", "degree": "硕士", "major": "设计信息学", "startDate": "2025-09", "endDate": "2026-11", "courses": "用户研究与人机交互（HCI）、数据科学与设计、数据驱动型产品设计、信息架构与可视化"}, {"school": "北京师范大学-香港浸会大学联合国际学院（UIC）", "degree": "本科", "major": "计算机科学与技术", "startDate": "2021-09", "endDate": "2025-07", "courses": "Python、Java、数据结构与算法、机器学习、NLP、统计学、线性代数"}], "experience": [{"company": "海康威视", "title": "产品经理实习生", "startDate": "2026-04", "endDate": "2026-08", "description": "项目背景：参与某高新区智慧城市项目（总投资超 2000 万元）智慧社区模块建设，覆盖需求调研、产品设计与功能落地全流程。\n需求调研与产品规划：基于 12345 政务服务平台近三年 10 万+ 条市民诉求数据，使用 Python 完成 NLP 分词、词频统计与可视化分析，提炼出学校教育、施工扰民、公共交通等 6 大民生痛点；设计 13 项需求调研指标并回收 500+ 份有效问卷，结合用户反馈与 Kano 模型 + 重要-紧急四象限排定功能优先级，并按项目交付周期动态调整排期，支撑智慧社区产品规划。\n产品设计与交互迭代：独立负责智慧社区核心产品设计与交互迭代，使用墨刀完成覆盖 AI 安防、独居关怀、便民服务三大核心场景的 30+ 个高保真原型；协同 UI 设计师完成视觉方案落地，组织多轮可用性测试，基于测试反馈持续优化信息架构、操作路径及关键交互，形成可直接支撑开发的产品原型与交互规范。\n功能落地与场景验收：推动 AI 智能安防与独居关怀功能落地，协同开发团队推进产品实施与场景验收；实现高空抛物实时识别成功预警 5 例、电瓶车入梯自动告警 23 次（试运行阶段实测数据）；针对试运行初期高空抛物等场景误报偏高问题，将误报素材回传海康算法训练平台开展定向模型迭代训练，持续压降误报、提升识别准确率；整合出行、用水等多源 IoT 数据构建独居老人风险预警机制，联动社区网格实现 30 分钟内上门响应。"}, {"company": "广东省数业智能科技有限公司", "title": "产品运营与测试实习生", "startDate": "2022-07", "endDate": "2022-08", "description": "项目背景：参与公司 AI 聊天机器人核心产品的质量保障与用户数据体系建设。\n产品测试与缺陷管理：对 AI 核心产品执行 4 轮功能测试，覆盖 30+ 功能模块，从用户与产品双视角进行缺陷溯源与定位；累计提交 20+ 个缺陷，推动研发解决 10+ 项长期遗留问题，缺陷修复率提升约 30%，改善用户体验。\n数据埋点与日志清洗：参与聊天机器人需求落地，基于产品埋点思维编写 Flume 拦截程序，实现每日 10 万+ 条用户日志自动清洗与分类，为用户行为分析与用户画像建设奠定数据基础。"}], "work": [], "projects": [{"name": "生态脉搏 EcoPulse", "role": "项目负责人", "startDate": "2026-05", "endDate": "2026-06", "tech": "策略游戏设计、数值配表、可用性测试、有声思考法、前端开发", "link": "https://ecopulse-cdh8ty8xo-mojinrui-ruizs-projects.vercel.app", "description": "项目背景：将传统环保工具重构为面向留学生的模拟生存策略沙盒游戏，独立完成 0→1 全流程。\n核心机制设计：独立设计「碳预算 + 精力值」双资源博弈模型，将英国 DEFRA 碳排放因子矩阵封装为底层数据表，保证数值系统有据可依。\n全流程交付与验证：负责概念设计、数值配表到前端开发全流程；组织 20+ 名目标用户开展可用性测试与有声思考法调研，根据反馈调优数值平衡与交互路径。"}, {"name": "大学生心理健康平台", "role": "项目负责人", "startDate": "2026-02", "endDate": "2026-03", "tech": "Say-Do-Make、卡片分类法、用户访谈、Figma、信息架构", "description": "项目背景：面向大学生高压场景的集成式心理健康管理平台，负责用户调研、功能规划与原型交付全流程。\n用户调研与痛点挖掘：基于 Say-Do-Make 调研框架，通过卡片分类法开展用户访谈与行为路径分析，挖掘出大学生在高压环境下心理与生理管理脱节的核心痛点，针对性降低与用户流失相关的认知负荷。\n功能规划与原型设计：负责功能规划与核心业务流程设计，使用 Figma 输出高保真原型，落地「情绪快速打卡 + 压力热力图 + 正念引导」集成式心理仪表盘；采用极简卡片式布局优化信息架构，提升数据可视化直观度，经两轮可用性测试迭代交互路径，用户交互满意度提升 30%。"}, {"name": "时空记忆树 The Memory Tree", "role": "项目负责人", "startDate": "2025-10", "endDate": "2025-11", "tech": "软硬件一体化、NLP 情感分析、触碰交互、可用性测试", "video": "media/memory-tree.mp4", "cover": "media/memory-tree.jpg", "description": "项目背景：针对爱丁堡国际艺术节数字档案零散、浏览缺乏沉浸感的痛点，落地交互式情感地图软硬件一体化产品，面向艺术爱好者打造线下沉浸式文旅体验。\n需求与方案设计：梳理档案内容，定义 NLP 情感标签与映射规则，完成海量文本情感主题聚类，实现档案情感可视化呈现。\n功能规划与原型设计：负责实物触碰交互产品方案，定义交互流程、异常兜底逻辑，协同软硬件团队联调，实现手机触碰展品调取对应档案。\n落地交付：开展可用性测试，招募 20+ 名目标用户完成线下体验，迭代后用户交互满意度提升 37%。"}], "leadership": [{"org": "UIC AI 专业学会", "title": "骨干成员 · 竞赛统筹", "description": "负责数学建模、电子竞技大赛等校内外大型竞赛的全流程项目管理与活动统筹，协调多方资源，管理百人级参赛团队。"}], "papers": [{"title": "微调轻量级模型以实现高效的文本风格转换：Gemma 方法", "journal": "DCS-DS 海报大会", "date": "2024", "description": "NLP 项目，入选 2024 年 DCS-DS 海报大会，受邀出席并现场展示。"}], "patents": [], "awards": [{"name": "香洲区小品大赛银奖（学校历史最高荣誉）", "description": "作为核心演员参赛"}], "languages": [{"language": "英语", "level": "工作语言", "proficiency": "全英文授课硕士，可独立撰写英文需求文档与学术、商业报告"}], "itSkills": [{"name": "Figma"}, {"name": "墨刀"}, {"name": "XMind"}, {"name": "Claude / Copilot / Codex 辅助需求分析与原型迭代"}, {"name": "Python"}, {"name": "SQL"}, {"name": "Java"}, {"name": "C"}, {"name": "R"}, {"name": "定性与定量数据分析"}], "certificates": [], "summary": "具备多段产品实习与 0-1 项目落地经验，擅长用户调研、需求优先级判断、原型设计与产品全链路迭代。熟悉 B/G 端智慧城市 AI 安防产品、AI 对话产品设计，独立完成多个 C 端软硬件一体化、交互类产品项目；擅长通过可用性测试、量化指标验证产品方案，运用 NLP、AI 能力挖掘用户价值，具备跨团队协同推动落地能力。对 AI 产品、用户产品有浓厚兴趣，逻辑扎实，善于挖掘用户痛点，以数据和用户反馈驱动产品持续优化。"};
-  const PERSONA = "你是莫晋睿的 AI 分身，代表他回答招聘方和访客的问题。语气真诚、具体、不浮夸；用第三人称称呼他（「晋睿」或「他」）。回答优先引用资料里的具体数字和做法（例如 10 万+ 条诉求、Kano 模型、30+ 个原型、满意度提升 37%）。资料里没有的不要编造，直接说不确定，并建议发邮件联系。不要透露手机号。";
+  const DATA = {"slug": "mojinrui", "name": "莫晋睿", "nameEn": "Jinrui Mo", "email": "846745322@qq.com", "headline": "把散落的用户声音，整理成能上线、能验证的产品", "bio": "爱丁堡大学设计信息学硕士在读。做过 G 端智慧城市 AI 安防、AI 对话产品，也独立完成了电商、心理健康、可持续等 C 端产品项目。习惯先看数据和用户，再画原型，最后用测试结果说话。", "links": [], "welcome": "你好，我是莫晋睿的 AI 分身。可以问我他做过的项目、在海康威视做了什么、怎么做用户调研，或者他想找什么样的工作。", "questions": ["在海康威视做了什么？", "本命追谷助手是怎么做出来的？", "怎么判断需求优先级？", "做过哪些 AI 相关的产品？", "为什么适合做产品经理？", "怎么联系他？"], "stats": [], "tags": ["产品经理", "用户研究", "AI 产品"], "intro": "爱丁堡大学设计信息学硕士在读。做过 G 端智慧城市 AI 安防、AI 对话产品，也独立完成了电商、心理健康、可持续等 C 端产品项目。", "about": ["有 **2 段产品实习**和 **3 个 0→1 产品项目**经验，习惯先看数据和用户，再画原型，最后用测试结果说话。", "在海康威视参与 **G 端智慧城市 AI 安防**产品：用 NLP 从 10 万+ 条市民诉求里提炼需求，用 Kano 模型排优先级，并推动 AI 安防、独居关怀功能落地验收；更早在 **AI 对话产品**实习中，负责功能测试和用户日志清洗。", "项目上独立完成 3 个 C 端产品：**B站会员购 · 本命追谷助手**（用 202 份问卷验证需求，定下只推本命的推送策略）、**大学生心理健康平台**（两轮可用性测试，满意度提升 30%）、**生态脉搏 EcoPulse**（用城市健康度和生存游戏，让碳足迹变得看得见）。"], "quote": "以数据和用户反馈驱动产品持续优化。", "facts": [{"icon": "cap", "k": "教育", "v": "爱丁堡大学（QS 2027 第 35）设计信息学硕士 / UIC 计算机本科"}, {"icon": "search", "k": "擅长", "v": "用户调研、需求优先级、原型设计、可用性测试"}, {"icon": "compass", "k": "熟悉方向", "v": "智慧城市 AI 安防、AI 对话产品、二次元电商"}, {"icon": "chat", "k": "语言", "v": "普通话 / 英语（全英文授课硕士，可作工作语言）"}, {"icon": "star", "k": "求职意向", "v": "产品经理（AI 产品 / 用户产品）"}], "intent": {"position": "产品经理（AI 产品 / 用户产品）"}, "education": [{"school": "爱丁堡大学", "degree": "硕士", "major": "设计信息学", "startDate": "2025-09", "endDate": "2026-11", "courses": "用户研究与人机交互（HCI）、数据科学与设计、数据驱动型产品设计、信息架构与可视化", "logo": "media/logo-edinburgh.png", "short": "UoE", "badge": "QS 2027 世界大学排名第 35"}, {"school": "北京师范大学-香港浸会大学联合国际学院（UIC）", "degree": "本科", "major": "计算机科学与技术", "startDate": "2021-09", "endDate": "2025-07", "courses": "Python、Java、数据结构与算法、机器学习、NLP、统计学、线性代数", "logo": "media/logo-uic.png", "short": "UIC"}], "experience": [{"company": "海康威视", "title": "产品经理实习生", "startDate": "2026-04", "endDate": "2026-08", "description": "项目背景：参与某高新区智慧城市项目（总投资超 2000 万元）智慧社区模块建设，覆盖需求调研、产品设计与功能落地全流程。\n需求调研与产品规划：基于 12345 政务服务平台近三年 10 万+ 条市民诉求数据，使用 Python 完成 NLP 分词、词频统计与可视化分析，提炼出学校教育、施工扰民、公共交通等 6 大民生痛点；设计 13 项需求调研指标并回收 500+ 份有效问卷，结合用户反馈与 Kano 模型 + 重要-紧急四象限排定功能优先级，并按项目交付周期动态调整排期，支撑智慧社区产品规划。\n产品设计与交互迭代：独立负责智慧社区核心产品设计与交互迭代，使用墨刀完成覆盖 AI 安防、独居关怀、便民服务三大核心场景的 30+ 个高保真原型；协同 UI 设计师完成视觉方案落地，组织多轮可用性测试，基于测试反馈持续优化信息架构、操作路径及关键交互，形成可直接支撑开发的产品原型与交互规范。\n功能落地与场景验收：推动 AI 智能安防与独居关怀功能落地，协同开发团队推进产品实施与场景验收；实现高空抛物实时识别成功预警 5 例、电瓶车入梯自动告警 23 次（试运行阶段实测数据）；针对试运行初期高空抛物等场景误报偏高问题，将误报素材回传海康算法训练平台开展定向模型迭代训练，持续压降误报、提升识别准确率；整合出行、用水等多源 IoT 数据构建独居老人风险预警机制，联动社区网格实现 30 分钟内上门响应。"}, {"company": "广东省数业智能科技有限公司", "title": "产品运营与测试实习生", "startDate": "2022-07", "endDate": "2022-08", "description": "项目背景：参与公司 AI 聊天机器人核心产品的质量保障与用户数据体系建设。\n产品测试与缺陷管理：对 AI 核心产品执行 4 轮功能测试，覆盖 30+ 功能模块，从用户与产品双视角进行缺陷溯源与定位；累计提交 20+ 个缺陷，推动研发解决 10+ 项长期遗留问题，缺陷修复率提升约 30%，改善用户体验。\n数据埋点与日志清洗：参与聊天机器人需求落地，基于产品埋点思维编写 Flume 拦截程序，实现每日 10 万+ 条用户日志自动清洗与分类，为用户行为分析与用户画像建设奠定数据基础。"}], "work": [], "projects": [{"id": "bili", "name": "B站会员购 · 本命追谷助手", "role": "产品经理（个人项目）", "startDate": "2026-10", "endDate": "2026-10", "tech": "问卷调研、竞品分析、RICE 模型、PRD、高保真原型、业务流程图", "cover": "media/bili-ui-1.jpg", "summary": "给二次元用户的「围绕本命买周边」需求，做一个按角色主动追踪新品、提醒补尾款、打通番剧页入口的会员购功能。", "description": "项目背景：B 站会员购聚合了多个 IP 的周边，又握有番剧内容和追番数据，但「围绕本命买周边」的需求没有产品承接；放弃容易被综合电商复制的通用 AI 导购，设计「本命追谷助手」。\n用户调研：围绕 4 个假设设计 19 题问卷，回收 202 份；71.3% 的周边购买者围绕本命购买，漏买本命新品是首要可解决痛点（39.8%）；本命推送接受度 77.7%，是通用促销（33.2%）的 2.3 倍，据此确定只推本命、不推促销的推送策略。\n竞品分析：对比淘宝/京东、闲鱼、IP 官方渠道及会员购现状 4 类竞品，发现现有提醒都以单个商品为单位、需先收藏才能触发，无法追踪未上架的新品，由此确定按角色主动追踪 + 番剧内容联动的差异化切入点。\n优先级决策：以问卷需求率和痛点率为依据，用 RICE 模型和价值/成本四象限评估功能，确定新周边提醒、预售补款日历为 P0，收集图鉴、吃谷账本为 P1，AI 问答需求一般、开发成本最高，定为 P2。\n项目产出：完成调研报告、竞品分析报告、PRD、8 页高保真原型与业务流程图；PRD 覆盖主流程与异常处理、推送频控规则和灰度方案，并定义本命设置率、提醒点击转化率、尾款按时支付率等核心指标。", "page": [{"t": "props", "items": [["角色", "产品经理（个人项目）"], ["时间", "2026.10"], ["方法", "问卷调研 · 竞品分析 · RICE · 四象限"], ["产出", "调研报告、竞品分析报告、PRD、高保真原型 8 页、业务流程图"]]}, {"t": "callout", "text": "不做通用 AI 导购，因为综合电商很容易复制。抓住 B 站独有的两样东西：用户对角色的感情，和番剧内容本身。"}, {"t": "h", "text": "1　需求洞察"}, {"t": "p", "text": "二次元用户买周边的单位是**角色**，不是商品。一个角色的新周边可能在任何店铺、任何时间上架，而现有电商的提醒都要求先收藏某个商品，追不到还没上架的新品。会员购聚合了多个 IP，又有用户的追番、点赞、收藏数据，具备按角色组织商品的条件。"}, {"t": "h", "text": "2　用户调研：202 份问卷验证 4 个假设"}, {"t": "stats", "items": [{"n": "202", "l": "份有效问卷（19 题）"}, {"n": "71.3%", "l": "周边购买者围绕本命购买"}, {"n": "49.1%", "l": "有 2 个及以上本命"}, {"n": "2.3×", "l": "本命推送接受度是通用促销的倍数"}]}, {"t": "bars", "title": "遇到过的问题（多选）", "items": [{"label": "本命出了新周边没及时发现", "v": 39.8, "hl": true}, {"label": "预售忘记补尾款", "v": 26.9}]}, {"t": "bars", "title": "推送接受度：只推本命 vs 通用促销", "items": [{"label": "本命相关推送", "v": 77.7, "hl": true}, {"label": "通用促销推送", "v": 33.2}], "note": "据此定下推送策略：只推本命，不推促销。"}, {"t": "bars", "title": "最想要的功能", "items": [{"label": "本命新周边上架提醒", "v": 52.0, "hl": true}, {"label": "预售补款提醒", "v": 27.2}], "note": "另有 61.9% 的用户愿意通过番剧页入口查看角色周边，16.3% 认为会打扰观看，所以入口只放在简介区，不在播放画面上弹出。"}, {"t": "h", "text": "3　竞品分析：提醒都以「单个商品」为单位"}, {"t": "table", "head": ["", "淘宝 / 京东", "闲鱼", "IP 官方渠道", "会员购现状"], "rows": [["提醒的单位", "单个商品，需先收藏", "无新品追踪", "按角色推系列", "无按角色追踪"], ["能否追踪未上架新品", "否", "否", "仅自家 IP", "否"], ["覆盖的 IP", "多", "多（二手）", "单一 IP，分散在多个店铺", "多"], ["番剧内容联动", "无", "无", "无", "有内容和追番数据，未打通"]]}, {"t": "callout", "text": "切入点：按角色主动追踪（竞品空白）＋ 番剧内容联动（B 站独有）。"}, {"t": "h", "text": "4　优先级决策：RICE ＋ 价值 / 成本四象限"}, {"t": "quadrant", "x": ["开发成本低", "开发成本高"], "y": ["价值低", "价值高"], "q": ["先做", "值得投入", "可以缓做", "不做 / 再调研"], "items": [{"label": "新周边提醒", "x": 0.28, "y": 0.86, "tag": "P0"}, {"label": "预售补款日历", "x": 0.16, "y": 0.7, "tag": "P0"}, {"label": "本命设定", "x": 0.38, "y": 0.78, "tag": "P0"}, {"label": "番剧页角色入口", "x": 0.62, "y": 0.74, "tag": "P0 灰度"}, {"label": "收集图鉴", "x": 0.42, "y": 0.4, "tag": "P1"}, {"label": "吃谷账本", "x": 0.24, "y": 0.32, "tag": "P1"}, {"label": "AI 问答", "x": 0.86, "y": 0.3, "tag": "P2"}], "note": "价值取自问卷中的需求率和痛点率；AI 问答需求一般、开发成本最高，放到 P2，补充调研后再定。"}, {"t": "h", "text": "5　核心功能与高保真原型"}, {"t": "gallery", "items": [{"src": "media/bili-ui-1.jpg", "caption": "首页「我的本命」卡片 · 设置我的本命"}, {"src": "media/bili-ui-2.jpg", "caption": "新品动态 · 提醒设置"}, {"src": "media/bili-ui-3.jpg", "caption": "补款日历 · 三类推送样式"}, {"src": "media/bili-ui-4.jpg", "caption": "番剧页角色周边入口 · 浮层"}]}, {"t": "h", "text": "6　业务流程"}, {"t": "image", "src": "media/bili-flow.jpg", "caption": "浅蓝为用户主流程起止，浅黄为系统触发的提醒，虚线为提醒或其他入口触发的跳转。", "narrow": true}, {"t": "h", "text": "7　关键规则（PRD 摘录）"}, {"t": "toggle", "title": "推送频控：不让提醒变成打扰", "blocks": [{"t": "list", "items": ["只推本命相关商品，不推通用新品和促销", "每人每天最多 3 条推送，超出只进站内消息；22:00 至次日 8:00 不推送", "同一本命 1 小时内多件上新，合并为一条「你的本命上新了 N 件周边」", "补款提醒属于交易通知，不计入每日上限"]}]}, {"t": "toggle", "title": "本命上限为什么是 10 个", "blocks": [{"t": "p", "text": "调研中 49.1% 的周边购买者有 2 个及以上本命，23.4% 有 4 个及以上。上限 10 个覆盖绝大多数用户，同时控制提醒数量。推荐角色只作候选，必须用户确认才生效。"}]}, {"t": "toggle", "title": "补款日历的提醒节点", "blocks": [{"t": "list", "items": ["尾款开始日、截止前 3 天、前 1 天、当天各提醒一次", "1 天内截止的订单置顶突出", "从任何入口完成支付后，剩余提醒自动取消"]}]}, {"t": "toggle", "title": "番剧页入口的灰度方案", "blocks": [{"t": "p", "text": "先对 10% 的番剧用户灰度 2 周。入口点击率不低于 5%、关闭率不高于 10% 时再全量。用户点「不感兴趣」后，该番剧 30 天内不再展示入口。"}]}, {"t": "h", "text": "8　指标体系"}, {"t": "table", "head": ["目标", "核心指标"], "rows": [["用户愿意设置本命", "本命设置率（上线 3 个月达到会员购活跃用户的 20%）、人均本命数"], ["提醒有用且不打扰", "提醒送达率、点击率、点击后下单转化率、提醒关闭率"], ["不再忘补尾款", "尾款按时支付率、补款日历访问率"], ["番剧流量转化为购买", "入口曝光点击率、「不感兴趣」率、带来的会员购订单数"]]}]}, {"id": "health", "name": "大学生心理健康平台", "role": "项目负责人", "startDate": "2026-02", "endDate": "2026-03", "tech": "Say-Do-Make、卡片分类法、用户访谈、Figma、信息架构", "link": "https://www.figma.com/proto/2wMoA61Hhs1vHrdXHXT4V0/Psychologicalinterface?node-id=0-1&t=3bThIUIiQzFj27kZ-1", "linkLabel": "打开 Figma 原型", "summary": "Ethereal Pavilion：面向高压大学生的心理健康 App 原型，把「记录 → 识别压力 → 即时减压 → 回看成长」串成一个闭环。", "description": "项目背景：面向大学生高压场景的集成式心理健康管理平台，负责用户调研、功能规划与原型交付全流程。\n用户调研与痛点挖掘：基于 Say-Do-Make 调研框架，通过卡片分类法开展用户访谈与行为路径分析，挖掘出大学生在高压环境下心理与生理管理脱节的核心痛点，针对性降低与用户流失相关的认知负荷。\n功能规划与原型设计：负责功能规划与核心业务流程设计，使用 Figma 输出高保真原型，落地「情绪快速打卡 + 压力热力图 + 正念引导」集成式心理仪表盘；采用极简卡片式布局优化信息架构，提升数据可视化直观度，经两轮可用性测试迭代交互路径，用户交互满意度提升 30%。", "page": [{"t": "props", "items": [["产品", "Ethereal Pavilion（英文界面高保真原型）"], ["角色", "项目负责人"], ["时间", "2026.02 – 2026.03"], ["方法", "Say-Do-Make · 卡片分类法 · 用户访谈 · 可用性测试"], ["产出", "调研结论、功能规划、Figma 高保真原型"]]}, {"t": "callout", "text": "大学生不缺心理健康 App，缺的是一个能把「我今天感觉怎样」和「接下来我能做什么」连在一起的地方。"}, {"t": "h", "text": "1　用户研究"}, {"t": "p", "text": "用 **Say-Do-Make** 框架组织调研：访谈听用户怎么说，行为路径分析看用户怎么做，卡片分类让用户自己排出功能的组织方式。三者对照后发现，高压环境下的大学生**心理和生理管理是脱节的**：情绪、压力和放松练习分散在不同工具里，看不出关联；记录负担又让用户很快流失。"}, {"t": "h", "text": "2　设计思路：一个闭环，而不是一堆功能"}, {"t": "loop", "steps": ["记录与自评", "识别压力", "即时减压", "回看成长"], "note": "每一步都直接把用户送到下一步：首页发现压力偏高，就提示去做呼吸练习；练习的次数和时长又回到成长页，变成看得见的进度。"}, {"t": "h", "text": "3　信息架构"}, {"t": "table", "head": ["模块", "页面", "用户在这里要完成的事"], "rows": [["首页", "记录与自评", "花几秒记下今天的心情，看到本周情绪和当前焦虑水平"], ["减压支持", "呼吸引导（Breathing）", "压力高时，跟着动画做一组呼吸，马上平静下来"], ["减压支持", "肯定语与感恩日记（Affirmations）", "读一句和今天情绪匹配的肯定语，写下或说出一件值得感恩的事"], ["成长", "Your Journey", "看压力趋势、连续天数和本周目标，确认自己在变好"]]}, {"t": "p", "text": "减压支持只用两个标签切换，不再往下分层：压力大的时候，用户没有耐心找入口。"}, {"t": "h", "text": "4　页面拆解"}, {"t": "screens", "items": [{"tag": "首页", "title": "记录与自评", "imgs": [{"src": "media/health-home.jpg", "alt": "首页：记录与自评"}], "points": ["顶部主卡直接问「今天压力大吗？」，打开 App 第一件事就是记录", "高压预警卡：近期指标偏高时主动提醒，并给出下一步「试试呼吸练习」", "两个主按钮分开两条路：「快速自评」负责记录，「获取减压支持」负责求助", "Weekly Mood 用表情记录一周情绪，当天显示「+」补记，空着的日子一眼就能看到", "Current Vitals 用进度条加「High」标签展示焦虑水平，不让用户读分数"]}, {"tag": "减压支持", "title": "呼吸引导", "imgs": [{"src": "media/health-breathing.jpg", "alt": "减压支持：呼吸引导"}], "points": ["顶部 Breathing / Affirmations 两个标签，切换两种减压方式", "分析结果卡先给结论「High Stress」，再说明依据（心率变异性和近期输入），并可以重新测试", "呼吸练习用缩放的圆环动画引导吸气和屏息，「Hold for 4 seconds」把动作说具体", "下方 Daily Sanctuaries 提供每日放松内容，练完还有可以继续的地方"]}, {"tag": "减压支持", "title": "肯定语与感恩日记", "imgs": [{"src": "media/health-affirm-1.jpg", "alt": "肯定语页上半部分"}, {"src": "media/health-affirm-2.jpg", "alt": "肯定语页下半部分"}], "points": ["今日肯定语卡片，可以「Share Light」分享或「Save to Pavilion」收藏", "「Based on your mood today」按当天情绪推荐内容，标注「Recommended for: Calm」，并可查看更多同类", "感恩日记同时支持文字和语音输入，降低记录负担", "Affirmation Gallery 按主题（如 Strength）整理成图片卡片，作为每日练习的视觉提示"]}, {"tag": "成长", "title": "Your Journey", "imgs": [{"src": "media/health-journey.jpg", "alt": "成长页"}], "points": ["顶部展示连续打卡 12 天、正念 240 分钟，给坚持一个看得见的回报", "Stress Trends 支持 7 天 / 30 天切换，高亮今天，压力的高峰和规律一目了然", "Weekly Focus 用 75% 圆环提示「还差 3 次达成本周正念目标」，目标拆小，更容易完成", "下方 Soul Badges 成就徽章，强化长期使用"]}]}, {"t": "figma", "url": "https://www.figma.com/proto/2wMoA61Hhs1vHrdXHXT4V0/Psychologicalinterface?node-id=0-1&t=3bThIUIiQzFj27kZ-1"}, {"t": "h", "text": "5　验证"}, {"t": "stats", "items": [{"n": "2 轮", "l": "可用性测试迭代交互路径"}, {"n": "+30%", "l": "用户交互满意度"}]}, {"t": "h", "text": "6　如果继续做：商业延展"}, {"t": "table", "head": ["方向", "思路"], "rows": [["客户", "高校心理健康中心、学工部门：采购给全校学生使用（B2B2C）"], ["价值", "匿名聚合的压力趋势帮学校在考试周等高峰前提前安排资源；个人数据不出个人账户"], ["收费", "按学生规模年费订阅；危机预警转介等增值模块单独计费"], ["底线", "隐私和伦理优先：学校只看匿名统计，高风险信号走专业转介流程"]]}], "cover": "media/health-cover.jpg"}, {"id": "eco", "name": "生态脉搏 EcoPulse", "role": "项目负责人", "startDate": "2026-05", "endDate": "2026-06", "tech": "Research-through-Design、DEFRA 2023 排放因子、情绪化反馈设计、游戏化机制、可用性测试、有声思考法", "link": "https://ecopulse-two.vercel.app/", "linkLabel": "在线体验", "summary": "EcoPulse：面向爱丁堡中国留学生的碳足迹反馈网页。每个日常选择都换算成真实的 kg CO₂e，再用城市健康度、生活类比和生存游戏，让这个数字变得「有感觉」。", "description": "项目背景：传统碳计算器只给一个冰冷的数字，用户算完就走；以 Research-through-Design 方式，为在爱丁堡的中国留学生设计碳足迹反馈原型，探索情绪化隐喻和透明的计算逻辑能否提升理解、信任与持续参与。\n核心功能设计：规划总览、城市地图、碳评分、未来视图、数据来源、生存游戏 6 个模块；城市地图把出行、取暖、购物、回国航班做成 4 个真实情景，每个选择即时换算成 kg CO₂e 和手机充电次数等生活类比，城市健康度随累计碳排下降，让后果看得见。\n游戏机制设计：生存游戏用「碳排 + 精力 + 预算」三资源、8 回合结构，让低碳不再是唯一正确答案；低碳选择积累生态点数，可在科技树解锁保温改造、电单车订阅等永久升级，结算按三项资源评级并进入排行榜。\n数据透明：以 DEFRA 2023 和 Poore & Nemecek (2018) 为数据源，每个结果都可展开查看计算过程与出处，单独设立数据来源与方法页并标注局限性。\n验证与迭代：组织 20+ 名目标用户开展可用性测试与有声思考法调研，根据反馈调优资源消耗比例与交互路径。", "page": [{"t": "props", "items": [["产品", "EcoPulse — Household Carbon Feedback"], ["性质", "Research-through-Design 原型 · 爱丁堡大学"], ["用户", "在爱丁堡生活的中国留学生"], ["数据", "DEFRA 2023 排放因子 · Poore & Nemecek (2018) 食物数据 · 对齐 SDG 12 & 13"], ["角色", "项目负责人（独立完成 0→1）"], ["时间", "2026.05 – 2026.06"], ["方法", "Research-through-Design · 可用性测试 · 有声思考法"]]}, {"t": "callout", "text": "碳排放是看不见的数字。EcoPulse 想回答一个问题：**情绪化的隐喻**和**透明的计算逻辑**，能不能让人真正理解自己的碳足迹、相信它，并且愿意持续用下去？"}, {"t": "h", "text": "1　问题与用户"}, {"t": "p", "text": "在爱丁堡读书的中国留学生，每天都在做出行、取暖、购物、饮食的选择，每年还要飞回国过年，但这些选择的碳排放是看不见的。传统碳计算器让用户填一遍表、拿到一个 kg 数，就结束了：**数字没有感觉，算法看不见，也没有理由再来第二次**。"}, {"t": "h", "text": "2　设计策略：把一个数字变成四种感受"}, {"t": "table", "head": ["要解决的问题", "设计手段", "在产品里的样子"], "rows": [["数字没有感觉", "生活类比", "每个结果都换算成手机充电次数、100W 灯泡小时数、树木吸收天数、牛肉份数、电动车公里数等"], ["后果离自己太远", "城市健康度", "Edinburgh Health 随累计碳排下降，地图从正常变橙、再变红，并配上「Edinburgh is suffering」等提示"], ["不知道数字怎么来的", "计算透明", "每个结果都能展开「Show calculation & source」，另设数据来源与方法页，写明口径和局限"], ["算一次就走", "游戏化", "三资源 8 回合的生存游戏、科技树升级、评级和排行榜，给用户再来一次的理由"]]}, {"t": "h", "text": "3　信息架构"}, {"t": "table", "head": ["模块", "用户在这里做什么"], "rows": [["Overview 总览", "看本次会话的碳排总量、6 类拆分和生活类比，从三张卡片进入主要功能"], ["City Map 城市地图", "在爱丁堡真实地标上点开情景，做选择，马上看到碳排和城市健康度的变化"], ["Carbon Score 碳评分", "看本周碳排按类别拆分、评级，以及「相当于什么」"], ["Data Sources 数据来源", "查每个排放因子的数值、含义和出处，以及方法和局限"], ["Survival Game 生存游戏", "在三种资源之间取舍，玩完 8 回合拿到评级"]]}, {"t": "h", "text": "4　总览与城市地图"}, {"t": "screens", "items": [{"tag": "总览", "title": "Overview", "wide": true, "imgs": [{"src": "media/eco-overview.jpg", "alt": "总览页"}], "points": ["首屏标题「Your household low impact carbon footprint」，一句话说明产品：用 DEFRA 2023 因子把日常行为换算成真实 CO₂e", "Session Carbon 显示本次会话总量，并标出每日平均值作为参照", "Breakdown 按出行、能源、食物、购物、垃圾、航班 6 类拆分", "This Equals 把同一个数字换算成灯泡小时、树木吸收天数、手机充电次数、伦敦—北京航班占比、牛肉份数", "三张入口卡片分别进入城市地图、碳评分和生存游戏；底部写明研究背景和数据来源"]}, {"tag": "城市地图", "title": "情景入口", "wide": true, "imgs": [{"src": "media/eco-map.jpg", "alt": "城市地图首页"}], "points": ["以爱丁堡真实地图为底，地标按 4 类上色：出行、家庭能源、食物与购物、垃圾", "情景放在留学生真正会去的地方：机场、王子街、卡尔顿山、学生宿舍、荷里路德公园", "右上角 Edinburgh Health 显示城市健康度和本次累计碳排，初始 100%", "顶部提示「点击地标探索碳排情景」，不需要说明书就能上手"]}, {"tag": "情景 A", "title": "出行：去卡尔顿山", "wide": true, "imgs": [{"src": "media/eco-a-transport.jpg", "alt": "情景 A：叫 Uber 去卡尔顿山"}], "points": ["情景写实：周六难得晴天，从 Pollock Halls 宿舍到卡尔顿山，2.4 km", "选择「叫 Uber」后，动画展示出租车行驶，结果 0.41 kg CO₂e", "换算成「手机充电 46 次，或 60W 灯泡亮 6.8 小时」", "可展开计算过程和出处（DEFRA 2023 / CEADs），也可以「换个选项试试」", "「62% 的同学做了这个选择，看看他们怎么说」：用同伴数据代替说教"]}, {"tag": "情景 B", "title": "家庭能源：冬天怎么取暖", "wide": true, "imgs": [{"src": "media/eco-b-heating.jpg", "alt": "情景 B：冬季取暖的五个选项"}], "points": ["情景：十一月，室外 4°C、室内 14°C，明天还要交论文", "5 个选项按能耗从高到低排列：暖气开满 22°C（约 5 kWh 燃气）、穿毛衣开 18°C（约 2.5 kWh）、只用电热毯（约 0.1 kWh 电）", "另外两个选项跳出「开多少暖气」：去 24 小时开放的主图书馆、去朋友家共享暖气", "每个选项同时写清能耗和舒适度（最舒服 / 有点冷 / 很冷），取舍摆在明面上"]}, {"tag": "情景 C", "title": "购物：王子街的打折夹克", "wide": true, "imgs": [{"src": "media/eco-c-fashion.jpg", "alt": "买两件快时尚：碳排预警"}, {"src": "media/eco-c-charity.jpg", "alt": "先逛慈善二手店"}], "points": ["同一个情景的两种结果放在一起对比：买 2 件快时尚 17.8 kg，先去 Oxfam 等慈善二手店 0.3 kg", "17.8 kg 换算成「相当于从爱丁堡开车到格拉斯哥」；二手的结果是「比新快时尚少 95% 碳排」", "累计碳排升高后，地图整体变成橙色，弹出 CARBON WARNING 和「城市健康度正在下降」", "低碳的选择配步行动画和绿色反馈，高碳配飘落的快递盒：同一个数字，情绪完全不同"]}, {"tag": "情景 D", "title": "出行：回国过年的航班", "wide": true, "imgs": [{"src": "media/eco-d-flight.jpg", "alt": "情景 D：回国航班"}], "points": ["留学生最大的一笔碳排：学期末回国过年，单程 9,000 km", "订直飞航班的结果是 1,801 kg CO₂e，换算成「约等于 50 周的爱丁堡日常生活碳排」", "地图变成红色，提示「Critical carbon level — Edinburgh is suffering」", "不禁止、不批评，只把代价摆出来，让用户自己判断"]}]}, {"t": "h", "text": "5　碳评分与数据透明"}, {"t": "screens", "items": [{"tag": "碳评分", "title": "Carbon Score", "wide": true, "imgs": [{"src": "media/eco-score.jpg", "alt": "碳评分页"}], "points": ["左侧大字显示本次碳排（0.4 kg，来自城市地图）和评级 Excellent", "右侧 6 类碳排横向条形图，标出每类的 kg 和占比，可以一键重置", "下方「This week equals」用 6 张卡片换算：4 小时灯泡、6.4 天树木吸收、46 次手机充电、0.06% 伦敦—北京航班、0 份牛肉、11 km 电动车"]}, {"tag": "数据来源", "title": "Data sources & methodology", "wide": true, "imgs": [{"src": "media/eco-data.jpg", "alt": "数据来源与方法页"}], "points": ["列出 13 个排放因子：数值、「这意味着什么」、出处，点任意一行可看详情", "每一行都配一个好懂的对照，例如「公交每公里 89 g，比汽油车少 48%」「二手衣服比新衣服少 99%」", "Methodology：遵循 GHG Protocol，航班使用 DEFRA 的辐射强迫系数", "Limitations：食物数据是 119 个国家的全球平均，DEFRA 是英国全国平均，结果仅供参考、不作认证"]}]}, {"t": "h", "text": "6　数值设计：每个结果都能追溯到一行数据"}, {"t": "p", "text": "产品里不出现自造的「分数」或「点数」，所有结果都是用排放因子直接算出的 kg CO₂e，再换算成生活类比："}, {"t": "table", "head": ["情景", "计算", "结果", "生活类比"], "rows": [["叫 Uber 去卡尔顿山", "2.4 km × 0.16983 kg/km（汽油车，DEFRA 2023）", "0.41 kg", "0.41 ÷ 0.00886 kg/次 ≈ 手机充电 46 次"], ["买 2 件快时尚", "2 件 × 8.92 kg/件（DEFRA 2023 材料使用）", "17.8 kg", "≈ 从爱丁堡开车到格拉斯哥"], ["回国直飞航班", "9,000 km × 0.20011 kg/km（长途经济舱 + 辐射强迫）", "1,801 kg", "≈ 50 周的爱丁堡日常生活"]]}, {"t": "toggle", "title": "展开：数据来源页的全部 13 个排放因子", "blocks": [{"t": "table", "head": ["类别", "数值", "含义", "来源"], "rows": [["英国电网电力", "0.207074 kg/kWh", "1 kWh ≈ 23 次手机充电", "DEFRA 2023"], ["天然气", "0.20226 kg/kWh", "1 kWh ≈ 烧 10 次水壶", "DEFRA 2023"], ["汽油车（平均）", "0.16983 kg/km", "爱丁堡→格拉斯哥 73 km = 12.4 kg", "DEFRA 2023"], ["出租车 / 网约车", "0.16983 kg/km", "与单人汽油车相同", "DEFRA 2023"], ["本地公交", "0.089 kg/km", "比汽油车少 48%", "DEFRA 2023"], ["国铁", "0.035 kg/km", "比汽油车少 80%", "DEFRA 2023"], ["长途航班（经济舱 + RF）", "0.20011 kg/km", "爱丁堡→上海 9,000 km = 1,801 kg", "DEFRA 2023"], ["牛肉", "60.0 kg/kg", "200 g 牛肉 = 12.0 kg", "Poore & Nemecek (2018)"], ["禽肉", "6.0 kg/kg", "比同重量牛肉少 10 倍", "Poore & Nemecek (2018)"], ["蔬菜", "0.4 kg/kg", "比同重量牛肉少 150 倍", "Poore & Nemecek (2018)"], ["新衣服", "8.92 kg/件", "≈ 汽油车开 53 km", "DEFRA 2023"], ["二手衣服", "0.06 kg/件", "比新衣服少 99%", "DEFRA 2023"], ["食物垃圾", "填埋 700 kg/吨", "堆肥 8.9 kg/吨，少 79 倍", "DEFRA 2023"]]}]}, {"t": "h", "text": "7　生存游戏：低碳不是唯一的正确答案"}, {"t": "p", "text": "城市地图回答「这个选择排多少碳」，生存游戏回答「在真实生活里，你能不能长期这样选」。玩家要同时管住三种资源，只追求低碳会累垮或花光钱。"}, {"t": "table", "head": ["资源", "含义"], "rows": [["精力 Energy", "太累就撑不下去：步行、自己做饭更低碳，但更耗精力"], ["预算 Budget", "留学生的生活费：外卖、打车省力但花钱"], ["碳排 Carbon", "累计 kg CO₂e，同时影响城市健康度"], ["回合 Turns", "共 8 回合，每回合在地图上选一个地点和一个行动"]]}, {"t": "loop", "steps": ["在地图上选地点", "选择行动", "精力 / 预算 / 碳排变化", "低碳选择攒生态点", "科技树永久升级"], "note": "8 回合结束后，按碳排、精力、预算三项综合评级，并进入全球排行榜。"}, {"t": "screens", "items": [{"tag": "生存游戏", "title": "回合决策", "wide": true, "imgs": [{"src": "media/eco-game.jpg", "alt": "生存游戏：卡尔顿山的行动选择"}], "points": ["顶部状态栏同时显示精力、预算、碳排、剩余回合和城市健康度", "地图上的地点都是留学生日常会去的：Lidl / Sainsbury's 超市、主图书馆、剧院、卡尔顿山", "到达地点后给出 2～3 个行动，每个都标出对精力、预算、碳排的影响，例如在卡尔顿山：自带午餐、路上买外卖、只是看风景", "高碳选项用红色卡片区分，但不禁用，选择权留给玩家"]}, {"tag": "生态科技树", "title": "Eco Tech Tree", "wide": true, "imgs": [{"src": "media/eco-tree.jpg", "alt": "生态科技树"}], "points": ["低碳选择获得生态点数，用来解锁「永久改变选项」的升级", "升级有前置关系：保温改造（取暖碳排 −20%）解锁太阳能板（每回合 +1 生态点）和社区合作社", "电单车订阅（骑行 +5 精力）解锁月票（公共交通费用 −40%）", "蔬菜盒订阅、堆肥（食物垃圾碳排 −30%）、碳追踪 App（选择前先看到准确碳排）", "把「一次性的好选择」变成「越玩越容易低碳」的长期激励"]}, {"tag": "结算", "title": "评级与排行榜", "wide": true, "imgs": [{"src": "media/eco-result.jpg", "alt": "结算页：A+ 与排行榜"}], "points": ["评级 A+「Sustainable Balance」，配五星和一句话总结：低碳、精力充沛、还有余钱", "三张卡片分别回顾碳排 6 kg、精力 100%、预算 £145", "排行榜按最低碳排排序，显示全球已玩 248 次和自己的名次", "另有「我的决策」回看每一步，以及分享入口，给用户再玩一次的理由"]}]}, {"t": "h", "text": "8　验证与迭代"}, {"t": "stats", "items": [{"n": "20+", "l": "名目标用户参与可用性测试"}, {"n": "有声思考法", "l": "记录用户每一步的决策理由"}]}, {"t": "p", "text": "根据测试中用户的决策理由，调优三种资源的消耗比例和交互路径，让「选低碳」既不是必然最优，也不是必然吃亏。"}, {"t": "h", "text": "9　商业延展：如果它是一款碳管理 SaaS"}, {"t": "table", "head": ["", "设想"], "rows": [["客户", "高校可持续发展办公室、国际学生服务部门；有 ESG 披露需求的企业（员工通勤与差旅）"], ["产品形态", "前台是城市情景和生存游戏，地图换成客户所在城市；后台是按 DEFRA 口径统计的匿名碳数据看板"], ["价值", "把难推动的行为改变变成参与式活动，同时产出可用于 Scope 3（通勤、差旅）核算的数据"], ["变现", "按席位年费订阅；新生入学季、地球日等挑战赛活动包；年度碳报告等数据增值服务"], ["关键指标", "参与率、低碳选择占比变化、季度留存"], ["风险", "数据准确性与「漂绿」质疑：沿用数据来源页的做法，公开口径和局限，只呈现可核查的结果"]]}], "cover": "media/eco-cover.jpg"}], "leadership": [{"org": "UIC AI 专业学会", "title": "骨干成员 · 竞赛统筹", "description": "负责数学建模、电子竞技大赛等校内外大型竞赛的全流程项目管理与活动统筹，协调多方资源，管理百人级参赛团队。"}], "papers": [{"title": "微调轻量级模型以实现高效的文本风格转换：Gemma 方法", "journal": "DCS-DS 海报大会", "date": "2024", "description": "NLP 项目，入选 2024 年 DCS-DS 海报大会，受邀出席并现场展示。"}], "patents": [], "awards": [{"name": "香洲区小品大赛银奖（学校历史最高荣誉）", "description": "作为核心演员参赛"}], "languages": [{"language": "英语", "level": "工作语言", "proficiency": "全英文授课硕士，可独立撰写英文需求文档与学术、商业报告"}], "itSkills": [{"name": "Figma"}, {"name": "墨刀"}, {"name": "XMind"}, {"name": "Claude / Copilot / Codex 辅助需求分析与原型迭代"}, {"name": "Python"}, {"name": "SQL"}, {"name": "Java"}, {"name": "C"}, {"name": "R"}, {"name": "定性与定量数据分析"}], "certificates": [], "summary": "具备 2 段产品实习与 3 个 0→1 产品项目经验，擅长用户调研、需求优先级判断、原型设计与可用性测试。实习中参与 G 端智慧城市 AI 安防产品与 AI 对话产品，运用 NLP 等 AI 能力从海量用户反馈中挖掘需求；独立完成电商、心理健康、可持续等方向的 C 端产品项目，以数据和用户反馈驱动产品迭代。"};
+  const PERSONA = "你是莫晋睿的 AI 分身，代表他回答招聘方和访客的问题。语气真诚、具体、不浮夸；用第三人称称呼他（「晋睿」或「他」）。回答优先引用资料里的具体数字和做法（例如 10 万+ 条诉求、Kano 模型、30+ 个原型、202 份问卷、满意度提升 30%）。资料里没有的不要编造，直接说不确定，并建议发邮件联系。不要透露手机号。";
 function localAnswer(pub, question) {
   const name = pub.name || '我';
   const q = question.toLowerCase().trim();
@@ -488,10 +629,10 @@ function localAnswer(pub, question) {
 
   // ---------- 方法：从经历和项目里自动找证据 ----------
   const STAGES = [
-    { name: '发现', def: '先弄清楚用户真正卡在哪', kws: [['用户调研', /用户调研|需求调研|调研/], ['用户访谈', /访谈/], ['问卷', /问卷/], ['NLP 分词', /NLP|分词/], ['词频分析', /词频/], ['卡片分类法', /卡片分类/], ['Say-Do-Make', /say-do-make/i], ['行为路径', /行为路径/], ['数据埋点', /埋点/], ['日志清洗', /日志|清洗/], ['痛点挖掘', /痛点/]] },
-    { name: '判断', def: '决定先做什么、不做什么', kws: [['Kano 模型', /kano/i], ['重要-紧急四象限', /四象限/], ['优先级', /优先级/], ['排期', /排期/], ['功能规划', /功能规划|产品规划/], ['数值设计', /数值/], ['机制设计', /机制|博弈/]] },
+    { name: '发现', def: '先弄清楚用户真正卡在哪', kws: [['用户调研', /用户调研|需求调研|调研/], ['用户访谈', /访谈/], ['问卷', /问卷/], ['NLP 分词', /NLP|分词/], ['词频分析', /词频/], ['卡片分类法', /卡片分类/], ['Say-Do-Make', /say-do-make/i], ['行为路径', /行为路径/], ['数据埋点', /埋点/], ['日志清洗', /日志|清洗/], ['痛点挖掘', /痛点/], ['竞品分析', /竞品/]] },
+    { name: '判断', def: '决定先做什么、不做什么', kws: [['Kano 模型', /kano/i], ['重要-紧急四象限', /四象限/], ['优先级', /优先级/], ['排期', /排期/], ['功能规划', /功能规划|产品规划/], ['数值设计', /数值/], ['机制设计', /机制|博弈/], ['RICE 评估', /RICE/i]] },
     { name: '设计', def: '把方案画成能讨论的原型', kws: [['高保真原型', /高保真|原型/], ['Figma', /figma/i], ['墨刀', /墨刀/], ['信息架构', /信息架构/], ['交互规范', /交互流程|交互规范|关键交互|交互路径/], ['数据可视化', /可视化|仪表盘|热力图/], ['软硬件联调', /软硬件|联调/], ['异常兜底', /兜底/]] },
-    { name: '验证', def: '用测试和数据确认它真的有用', kws: [['可用性测试', /可用性测试/], ['有声思考法', /有声思考/], ['满意度', /满意度/], ['场景验收', /验收/], ['误报回流训练', /误报|模型迭代/], ['缺陷管理', /缺陷/], ['功能测试', /功能测试/], ['实测数据', /实测|预警|告警/]] },
+    { name: '验证', def: '用测试和数据确认它真的有用', kws: [['可用性测试', /可用性测试/], ['有声思考法', /有声思考/], ['满意度', /满意度/], ['场景验收', /验收/], ['误报回流训练', /误报|模型迭代/], ['缺陷管理', /缺陷/], ['功能测试', /功能测试/], ['实测数据', /实测|预警|告警/], ['灰度发布', /灰度/]] },
   ];
   function evidence(p) {
     const sents = [];
@@ -620,7 +761,9 @@ function localAnswer(pub, question) {
       sec.push(`
       <section class="sec" id="edu"><div class="wrap">
         <div class="sec-h"><h2>教育背景</h2></div>
-        <div class="edu">${edu.map((e) => `<div class="it"><span class="when">${esc(span(e.startDate, e.endDate))}</span><b>${esc(e.school)}</b><span class="deg">${esc([e.major, e.degree].filter(Boolean).join('，'))}</span>${e.courses ? `<p>主修：${esc(e.courses)}</p>` : ''}</div>`).join('')}</div>
+        <div class="edu">${edu.map((e) => `<div class="it">
+          <div class="crest">${e.logo && safeUrl(e.logo) ? `<img src="${esc(e.logo)}" alt="${esc(e.school)}校徽" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'mono',textContent:this.dataset.m}))" data-m="${esc(e.short || e.school.slice(0, 2))}">` : `<span class="mono">${esc(e.short || e.school.slice(0, 2))}</span>`}</div>
+          <div class="info"><span class="when">${esc(span(e.startDate, e.endDate))}</span><b>${esc(e.school)}</b>${e.badge ? `<span class="badge">${esc(e.badge)}</span>` : ''}<span class="deg">${esc([e.major, e.degree].filter(Boolean).join('，'))}</span>${e.courses ? `<p>主修：${esc(e.courses)}</p>` : ''}</div></div>`).join('')}</div>
       </div></section>`);
     }
     if (exp.length) {
@@ -699,35 +842,153 @@ function localAnswer(pub, question) {
     const ls = lines(x.description), bg = ls.find(isBg), rest = ls.filter((l) => l !== bg);
     const tags = String(x.tech || '').split(/[、,，/]/).map((t) => t.trim()).filter(Boolean);
     const link = safeUrl(x.link), video = safeUrl(x.video), cover = safeUrl(x.cover);
+    const detail = x.id && x.page?.length ? `#detail-${x.id}` : '';
     let media;
     if (video) media = `<div class="media"><video preload="none" playsinline controls ${cover ? `poster="${esc(cover)}"` : ''} src="${esc(video)}" aria-label="${esc(x.name)} 演示视频"></video>
       <button class="play" data-play aria-label="播放 ${esc(x.name)} 演示视频"><span><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.5v11l9-5.5z" fill="currentColor"/></svg>播放演示</span></button></div>`;
-    else if (cover) media = `<div class="media"><img src="${esc(cover)}" alt="${esc(x.name)}" loading="lazy"></div>`;
+    else if (cover) media = `<a class="media" ${detail ? `href="${detail}"` : ''} aria-label="查看「${esc(x.name)}」产品详情"><img src="${esc(cover)}" alt="${esc(x.name)} 界面" loading="lazy"></a>`;
     else {
-      // 没有图片 / 视频：封面放这个项目最有说服力的一个结果（优先百分比）
+      // 没有图片：封面放这个项目最有说服力的一个结果（优先百分比）
       const clauses = rest.flatMap((l) => l.text.split(/[，,；;。]/)).map((c) => c.trim()).filter((c) => c.match(NUM));
       const best = clauses.find((c) => /%/.test(c)) || clauses.sort((a, b) => b.length - a.length)[0];
       const num = best ? best.match(NUM)[0].trim() : '';
-      media = `<div class="media typo">${link ? `<a class="open" href="${esc(link)}" target="_blank" rel="noopener">在线体验 ↗</a>` : ''}
+      media = `<div class="media typo">${detail ? `<a class="open" href="${detail}">产品详情 →</a>` : ''}
         ${num ? `<div class="res"><span class="big"><mark class="hl">${esc(num)}</mark></span><span class="ctx">${esc(best)}</span></div>` : `<div class="t">${esc(x.name)}</div>`}
       <div class="tags">${tags.slice(0, 5).map((t, k) => `<span style="--r:${[-2, 1.5, -1, 2, -1.5][k]}deg">${esc(t)}</span>`).join('')}</div></div>`;
     }
+    const lede = x.summary || bg?.text;
     return `<article class="case" id="p-${i}">
       ${media}
       <div class="ink-in">
         <p class="when">${esc([span(x.startDate, x.endDate), x.role].filter(Boolean).join('　'))}</p>
         <h3>${esc(x.name)}</h3>
-        ${bg ? `<p class="lede">${hl(bg.text)}</p>` : ''}
+        ${lede ? `<p class="lede">${hl(lede)}</p>` : ''}
         ${rest.length ? `<ul class="more">${rest.map((l, k) => `<li ${k >= 1 ? 'data-extra hidden' : ''}>${l.head ? `<b>${esc(l.head)}</b>` : ''}${hl(l.text)}</li>`).join('')}</ul>` : ''}
         ${tags.length ? `<ul class="tagline">${tags.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>` : ''}
         <div class="acts">
-          ${rest.length > 1 ? '<button class="btn" data-expand aria-expanded="false">看完整案例</button>' : ''}
-          ${link ? `<a class="btn" href="${esc(link)}" target="_blank" rel="noopener">打开项目 ↗</a>` : ''}
-          <button class="btn" data-ask="${esc(`详细说说「${x.name}」：要解决什么问题，他具体做了什么，结果如何？`)}">问 AI 这个项目</button>
+          ${detail ? `<a class="btn solid" href="${detail}">查看产品详情 →</a>` : ''}
+          ${rest.length > 1 ? '<button class="btn" data-expand aria-expanded="false">展开要点</button>' : ''}
+          ${link ? `<a class="btn" href="${esc(link)}" target="_blank" rel="noopener">${esc(x.linkLabel || '打开项目')} ↗</a>` : ''}
+          <button class="btn ghost" data-ask="${esc(`详细说说「${x.name}」：要解决什么问题，他具体做了什么，结果如何？`)}">问 AI</button>
         </div>
       </div>
     </article>`;
   }
+
+  // ---------- 项目详情页（Notion 风格） ----------
+  const rich = (t) => hl(t).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
+  const pct = (v) => `${Math.max(0, Math.min(1, +v || 0)) * 100}%`;
+  function blockHtml(b, ctx) {
+    switch (b.t) {
+      case 'props': return `<dl class="props">${b.items.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>`;
+      case 'callout': return `<div class="callout"><span class="ci" aria-hidden="true">✦</span><p>${rich(b.text)}</p></div>`;
+      case 'h': { const id = `${ctx.id}-s${ctx.toc.length}`; ctx.toc.push([id, b.text]); return `<h2 id="${id}">${esc(b.text)}</h2>`; }
+      case 'p': return `<p>${rich(b.text)}</p>`;
+      case 'list': return `<ul class="dl">${b.items.map((t) => `<li>${rich(t)}</li>`).join('')}</ul>`;
+      case 'stats': return `<div class="dstats">${b.items.map((s) => `<div><b>${esc(s.n)}</b><span>${esc(s.l)}</span></div>`).join('')}</div>`;
+      case 'bars': {
+        const max = Math.max(...b.items.map((i) => +i.v || 0), 1);
+        return `<figure class="bars">${b.title ? `<figcaption>${esc(b.title)}</figcaption>` : ''}
+          ${b.items.map((i) => `<div class="bar${i.hl ? ' on' : ''}"><span class="bl">${esc(i.label)}</span><span class="tr"><i style="width:${(i.v / max) * 100}%"></i></span><span class="bv">${esc(i.v)}%</span></div>`).join('')}
+          ${b.note ? `<p class="note-s">${rich(b.note)}</p>` : ''}</figure>`;
+      }
+      case 'table': return `<div class="tbl"><table><thead><tr>${b.head.map((h) => `<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${b.rows.map((r) => `<tr>${r.map((c, k) => k ? `<td>${rich(c)}</td>` : `<th scope="row">${rich(c)}</th>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+      case 'quadrant': {
+        // q 顺序：左上、右上、左下、右下
+        const zone = (it) => (it.y >= .5 ? 0 : 2) + (it.x >= .5 ? 1 : 0);
+        const cells = b.q.map((q, k) => `<div class="qc q${k}"><span class="qt">${esc(q)}</span>${b.qOnly ? '' : `<ul class="qlist">${b.items.filter((it) => zone(it) === k).map((it) => `<li>${esc(it.label)}${it.tag ? `<em>${esc(it.tag)}</em>` : ''}</li>`).join('')}</ul>`}</div>`).join('');
+        const dots = b.qOnly ? '' : b.items.map((it) => `<span class="qd" style="left:${pct(it.x)};bottom:${pct(it.y)}">${esc(it.label)}${it.tag ? `<em>${esc(it.tag)}</em>` : ''}</span>`).join('');
+        return `<figure class="quad${b.qOnly ? ' only' : ''}">
+          <div class="qy"><span>${esc(b.y[1])} ↑</span><span>${esc(b.y[0])}</span></div>
+          <div class="qbox">${cells}${dots ? `<div class="qdots">${dots}</div>` : ''}</div>
+          <div class="qx"><span>${esc(b.x[0])}</span><span>→ ${esc(b.x[1])}</span></div>
+          ${b.note ? `<figcaption>${rich(b.note)}</figcaption>` : ''}</figure>`;
+      }
+      case 'loop': return `<figure class="loop"><ol>${b.steps.map((s, k) => `<li><span class="n">${k + 1}</span>${esc(s)}</li>`).join('')}</ol><div class="back" aria-hidden="true">↺ 回到第 1 步，进入下一轮</div>${b.note ? `<figcaption>${rich(b.note)}</figcaption>` : ''}</figure>`;
+      case 'gallery': return `<div class="gal">${b.items.map((g) => safeUrl(g.src) ? `<figure><button class="zoom" data-zoom="${esc(g.src)}" data-cap="${esc(g.caption || '')}" aria-label="放大查看：${esc(g.caption || '')}"><img src="${esc(g.src)}" alt="${esc(g.caption || '')}" loading="lazy"></button>${g.caption ? `<figcaption>${esc(g.caption)}</figcaption>` : ''}</figure>` : '').join('')}</div>`;
+      case 'image': return safeUrl(b.src) ? `<figure class="dimg${b.narrow ? ' narrow' : ''}"><button class="zoom" data-zoom="${esc(b.src)}" data-cap="${esc(b.caption || '')}" aria-label="放大查看"><img src="${esc(b.src)}" alt="${esc(b.caption || '')}" loading="lazy"></button>${b.caption ? `<figcaption>${esc(b.caption)}</figcaption>` : ''}</figure>` : '';
+      case 'figma': {
+        const u = safeUrl(b.url);
+        if (!u) return '';
+        return `<div class="embed" data-embed="${esc('https://www.figma.com/embed?embed_host=share&url=' + encodeURIComponent(u))}">
+          <div class="em-h"><b>Figma 高保真原型</b><span>可以在新窗口打开，或者在这里直接加载试点</span></div>
+          <div class="acts"><a class="btn solid" href="${esc(u)}" target="_blank" rel="noopener">在新窗口打开 ↗</a><button class="btn" data-load-embed>在页面内加载</button></div></div>`;
+      }
+      case 'screens': return `<div class="scr">${b.items.map((s, k) => `
+        <section class="scr-i${s.imgs.length > 1 ? ' two' : ''}${s.wide ? ' wide' : ''}">
+          <div class="scr-img">${s.imgs.filter((g) => safeUrl(g.src)).map((g) => `<button class="zoom" data-zoom="${esc(g.src)}" data-cap="${esc(`${s.title}：${g.alt || ''}`)}" aria-label="放大查看：${esc(g.alt || s.title)}"><img src="${esc(g.src)}" alt="${esc(g.alt || s.title)}" loading="lazy"></button>`).join('')}</div>
+          <div class="scr-t"><span class="scr-tag">${esc(String(k + 1).padStart(2, '0'))} · ${esc(s.tag || '')}</span><h3>${esc(s.title)}</h3>
+            <ol>${s.points.map((t) => `<li><span>${rich(t)}</span></li>`).join('')}</ol></div>
+        </section>`).join('')}</div>`;
+      case 'toggle': return `<details class="tg"><summary>${esc(b.title)}</summary><div>${(b.blocks || []).map((x) => blockHtml(x, ctx)).join('')}</div></details>`;
+      default: return '';
+    }
+  }
+  function detailHtml(x, all) {
+    const ctx = { id: 'd-' + x.id, toc: [] };
+    const body = x.page.map((b) => blockHtml(b, ctx)).join('');
+    const i = all.indexOf(x), prev = all[i - 1], next = all[i + 1];
+    const cover = safeUrl(x.banner), link = safeUrl(x.link);
+    const tags = String(x.tech || '').split(/[、,，/]/).map((t) => t.trim()).filter(Boolean);
+    const has = (p) => p && p.id && p.page?.length;
+    return `<div class="dcover${cover ? '' : ' plain'}">${cover ? `<img src="${esc(cover)}" alt="">` : `<div class="dpat" aria-hidden="true">${tags.slice(0, 6).map((t) => `<span>${esc(t)}</span>`).join('')}</div>`}</div>
+      <div class="wrap dwrap">
+        <article class="doc">
+          <a class="dback" href="#work">← 返回项目列表</a>
+          <div class="dicon" aria-hidden="true">${esc(String(i + 1).padStart(2, '0'))}</div>
+          <h1>${esc(x.name)}</h1>
+          ${x.summary ? `<p class="dlede">${rich(x.summary)}</p>` : ''}
+          ${body}
+          <div class="dfoot">
+            <div class="acts">${link ? `<a class="btn solid" href="${esc(link)}" target="_blank" rel="noopener">${esc(x.linkLabel || '打开项目')} ↗</a>` : ''}<button class="btn" data-ask="${esc(`详细说说「${x.name}」：要解决什么问题，他具体做了什么，结果如何？`)}">问 AI 这个项目</button></div>
+            <nav class="pn" aria-label="其它项目">${has(prev) ? `<a href="#detail-${prev.id}"><small>上一个项目</small>${esc(prev.name)}</a>` : '<span></span>'}${has(next) ? `<a class="nx" href="#detail-${next.id}"><small>下一个项目</small>${esc(next.name)}</a>` : ''}</nav>
+          </div>
+        </article>
+        ${ctx.toc.length > 2 ? `<aside class="toc" aria-label="本页目录"><b>本页目录</b>${ctx.toc.map(([id, t]) => `<a href="#${id}" data-toc>${esc(t)}</a>`).join('')}</aside>` : ''}
+      </div>`;
+  }
+  const view = { open: null, y: 0 };
+  function route() {
+    const p = window.__pub;
+    if (!p) return;
+    const m = location.hash.match(/^#detail-([\w-]+)$/);
+    const x = m && (p.projects || []).find((q) => q.id === m[1] && q.page?.length);
+    const app = $('#app'), dv = $('#detail');
+    if (x) {
+      if (!view.open) view.y = scrollY;
+      view.open = x.id;
+      dv.innerHTML = detailHtml(x, p.projects);
+      app.hidden = true; dv.hidden = false;
+      document.title = `${x.name} · ${p.name}`;
+      scrollTo({ top: 0, behavior: 'instant' });
+      $$('[data-toc]', dv).forEach((a) => a.onclick = (e) => { e.preventDefault(); document.getElementById(a.getAttribute('href').slice(1))?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); });
+      $$('[data-load-embed]', dv).forEach((b) => b.onclick = () => {
+        const box = b.closest('.embed'), f = document.createElement('iframe');
+        f.src = box.dataset.embed; f.title = 'Figma 原型'; f.loading = 'lazy'; f.allowFullscreen = true;
+        box.append(f); b.remove();
+      });
+      return;
+    }
+    if (!view.open) return;
+    view.open = null;
+    dv.hidden = true; dv.innerHTML = ''; app.hidden = false;
+    document.title = `${p.name}${p.headline ? ' · ' + p.headline : ' · 个人主页'}`;
+    const t = location.hash && document.getElementById(location.hash.slice(1));
+    if (t) t.scrollIntoView({ behavior: 'instant' }); else scrollTo({ top: view.y, behavior: 'instant' });
+  }
+  addEventListener('hashchange', route);
+  // 图片放大
+  document.addEventListener('click', (e) => {
+    const z = e.target.closest('[data-zoom]');
+    if (!z) return;
+    const lb = document.createElement('div');
+    lb.className = 'lb'; lb.setAttribute('role', 'dialog'); lb.setAttribute('aria-label', '图片放大');
+    lb.innerHTML = `<button class="x" aria-label="关闭">×</button><img src="${esc(z.dataset.zoom)}" alt="${esc(z.dataset.cap)}">${z.dataset.cap ? `<p>${esc(z.dataset.cap)}</p>` : ''}`;
+    const close = () => { lb.remove(); removeEventListener('keydown', key); z.focus(); };
+    const key = (ev) => ev.key === 'Escape' && close();
+    lb.onclick = close; addEventListener('keydown', key);
+    document.body.append(lb); $('.x', lb).focus();
+  });
 
   // ---------- 白板 ----------
   function board(st) {
@@ -854,7 +1115,7 @@ function localAnswer(pub, question) {
     $$('[data-expand]').forEach((b) => b.onclick = () => {
       const box = b.closest('.ink-in'), open = b.getAttribute('aria-expanded') !== 'true';
       $$('[data-extra]', box).forEach((li) => (li.hidden = !open));
-      b.setAttribute('aria-expanded', String(open)); b.textContent = open ? '收起' : '看完整案例';
+      b.setAttribute('aria-expanded', String(open)); b.textContent = open ? '收起' : '展开要点';
     });
     // 经历展开
     $$('[data-toggle]').forEach((b) => b.onclick = () => {
@@ -944,10 +1205,10 @@ function localAnswer(pub, question) {
     addMsg('bot', p.welcome || `你好，我是${p.name}的 AI 分身。可以问我${p.name}的项目、经历、做事方法，或者求职意向。`);
     agent.suggestions = p.questions?.length ? p.questions : ['做过哪些项目？', '有什么实习经历？', '擅长什么？', '在哪里读书？', '求职意向是什么？', '怎么联系？'];
     renderSugg();
-    if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView();
+    if (/^#detail-/.test(location.hash)) route(); else if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView();
   })();
 })();
 
 </script>
-</body>
-</html>
+
+</body></html>
